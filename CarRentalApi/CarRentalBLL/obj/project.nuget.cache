@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "fKhEXU4j3EYbE5TlybiTGY030yPhJ0UTgIZwPYbpDPduUQj7VCeFkySVhHtWJv/1BXbDMA8xdcSxOvknQzNg+Q==",
+  "dgSpecHash": "LvxMEJv0jCVqsC5imLzTsoJ8Hs7rvlTwd+9EJlatXbL31lSQXhOhZ24AMuRt6WelyXqJGwEBjUT7yS12oRx0OA==",
   "success": true,
-  "projectFilePath": "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj",
+  "projectFilePath": "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kaju\\.nuget\\packages\\microsoft.aspnetcore.authentication\\2.2.0\\microsoft.aspnetcore.authentication.2.2.0.nupkg.sha512",
     "C:\\Users\\Kaju\\.nuget\\packages\\microsoft.aspnetcore.authentication.abstractions\\2.2.0\\microsoft.aspnetcore.authentication.abstractions.2.2.0.nupkg.sha512",

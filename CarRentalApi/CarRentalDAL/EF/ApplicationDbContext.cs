@@ -1,4 +1,4 @@
-﻿using CarRentalBLL.Entities;
+﻿
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -7,26 +7,14 @@ using System.Text;
 
 namespace CarRentalDAL.EF
 {
-    public class ApplicationDbContext : IdentityDbContext<Client>
+    public class ApplicationDbContext : DbContext
     {
-        private readonly ConnectionStringDto _connectionStringDto;
-        // Table properties e.g
-        // other table properties
-        // ……
-        public ApplicationDbContext(ConnectionStringDto connectionStringDto)
-        {
-            _connectionStringDto = connectionStringDto;
-        }
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            base.OnConfiguring(optionsBuilder);
-            optionsBuilder.UseSqlServer(_connectionStringDto.ConnectionString);
-        }
+        public ApplicationDbContext() : base() { }
+        public DbSet<Car> Cars { get; set; }
+ 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            // Fluent API commands
-
         }
     }
 }

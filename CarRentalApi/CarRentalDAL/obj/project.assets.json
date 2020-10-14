@@ -1179,19 +1179,6 @@
         "compile": {
           "ref/netstandard1.3/System.Threading.Tasks.dll": {}
         }
-      },
-      "CarRentalBLL/1.0.0": {
-        "type": "project",
-        "framework": ".NETStandard,Version=v2.0",
-        "dependencies": {
-          "Microsoft.AspNetCore.Identity.EntityFrameworkCore": "2.2.0"
-        },
-        "compile": {
-          "bin/placeholder/CarRentalBLL.dll": {}
-        },
-        "runtime": {
-          "bin/placeholder/CarRentalBLL.dll": {}
-        }
       }
     }
   },
@@ -4012,16 +3999,10 @@
         "system.threading.tasks.4.0.11.nupkg.sha512",
         "system.threading.tasks.nuspec"
       ]
-    },
-    "CarRentalBLL/1.0.0": {
-      "type": "project",
-      "path": "../CarRentalBLL/CarRentalBLL.csproj",
-      "msbuildProject": "../CarRentalBLL/CarRentalBLL.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETStandard,Version=v2.0": [
-      "CarRentalBLL >= 1.0.0",
       "Microsoft.AspNet.Identity.EntityFramework >= 2.2.3",
       "Microsoft.AspNetCore.Identity >= 2.2.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 2.2.0",
@@ -4038,11 +4019,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalDAL\\CarRentalDAL.csproj",
+      "projectUniqueName": "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalDAL\\CarRentalDAL.csproj",
       "projectName": "CarRentalDAL",
-      "projectPath": "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalDAL\\CarRentalDAL.csproj",
+      "projectPath": "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalDAL\\CarRentalDAL.csproj",
       "packagesPath": "C:\\Users\\Kaju\\.nuget\\packages\\",
-      "outputPath": "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalDAL\\obj\\",
+      "outputPath": "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalDAL\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -4062,11 +4043,7 @@
       },
       "frameworks": {
         "netstandard2.0": {
-          "projectReferences": {
-            "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj": {
-              "projectPath": "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj"
-            }
-          }
+          "projectReferences": {}
         }
       },
       "warningProperties": {

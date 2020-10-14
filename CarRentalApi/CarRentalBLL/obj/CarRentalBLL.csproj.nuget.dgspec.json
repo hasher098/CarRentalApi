@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj": {}
+    "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj": {}
   },
   "projects": {
-    "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj": {
+    "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj",
+        "projectUniqueName": "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj",
         "projectName": "CarRentalBLL",
-        "projectPath": "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj",
+        "projectPath": "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj",
         "packagesPath": "C:\\Users\\Kaju\\.nuget\\packages\\",
-        "outputPath": "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\obj\\",
+        "outputPath": "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",

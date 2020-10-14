@@ -5,10 +5,6 @@ VisualStudioVersion = 16.0.30320.27
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CarRentalApi", "CarRentalApi\CarRentalApi.csproj", "{EBB6CC1E-C935-4ABA-837C-69E56A1D66E0}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentalBLL", "CarRentalBLL\CarRentalBLL.csproj", "{999AA359-C954-4833-9635-A45639814911}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CarRentalDAL", "CarRentalDAL\CarRentalDAL.csproj", "{85404D4C-B398-4FEF-A559-F01C8ACE4619}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -19,14 +15,6 @@ Global
 		{EBB6CC1E-C935-4ABA-837C-69E56A1D66E0}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EBB6CC1E-C935-4ABA-837C-69E56A1D66E0}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EBB6CC1E-C935-4ABA-837C-69E56A1D66E0}.Release|Any CPU.Build.0 = Release|Any CPU
-		{999AA359-C954-4833-9635-A45639814911}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{999AA359-C954-4833-9635-A45639814911}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{999AA359-C954-4833-9635-A45639814911}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{999AA359-C954-4833-9635-A45639814911}.Release|Any CPU.Build.0 = Release|Any CPU
-		{85404D4C-B398-4FEF-A559-F01C8ACE4619}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{85404D4C-B398-4FEF-A559-F01C8ACE4619}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{85404D4C-B398-4FEF-A559-F01C8ACE4619}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{85404D4C-B398-4FEF-A559-F01C8ACE4619}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

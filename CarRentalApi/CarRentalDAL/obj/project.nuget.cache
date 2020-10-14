@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "qfKXGjUAbAC3D25QUeiXRLBNHXIsWT4v19eHQp1nApFHG90cqzXtXAewqtb0YP2vgA3F26U6Z9T1z9vy2sRMNA==",
+  "dgSpecHash": "fSDtgY/7IKL5VSCfl20S5n98M3RvRT9dAiz02CNXhswnIf9D8vcFI4hOzfAPy27sPksme7gIlsWpqClFUmDuDA==",
   "success": true,
-  "projectFilePath": "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalDAL\\CarRentalDAL.csproj",
+  "projectFilePath": "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalDAL\\CarRentalDAL.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Kaju\\.nuget\\packages\\entityframework\\6.1.0\\entityframework.6.1.0.nupkg.sha512",
     "C:\\Users\\Kaju\\.nuget\\packages\\microsoft.aspnet.identity.core\\2.2.3\\microsoft.aspnet.identity.core.2.2.3.nupkg.sha512",
