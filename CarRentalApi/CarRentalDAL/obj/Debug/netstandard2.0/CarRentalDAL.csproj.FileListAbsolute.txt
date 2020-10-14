@@ -1,0 +1,11 @@
+D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalDAL\bin\Debug\netstandard2.0\CarRentalDAL.deps.json
+D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalDAL\bin\Debug\netstandard2.0\CarRentalDAL.dll
+D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalDAL\bin\Debug\netstandard2.0\CarRentalDAL.pdb
+D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalDAL\bin\Debug\netstandard2.0\CarRentalBLL.dll
+D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalDAL\bin\Debug\netstandard2.0\CarRentalBLL.pdb
+D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalDAL\obj\Debug\netstandard2.0\CarRentalDAL.csprojAssemblyReference.cache
+D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalDAL\obj\Debug\netstandard2.0\CarRentalDAL.AssemblyInfoInputs.cache
+D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalDAL\obj\Debug\netstandard2.0\CarRentalDAL.AssemblyInfo.cs
+D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalDAL\obj\Debug\netstandard2.0\CarRentalDAL.csproj.CopyComplete
+D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalDAL\obj\Debug\netstandard2.0\CarRentalDAL.dll
+D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalDAL\obj\Debug\netstandard2.0\CarRentalDAL.pdb
