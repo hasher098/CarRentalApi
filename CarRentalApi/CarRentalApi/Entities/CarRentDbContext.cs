@@ -9,6 +9,7 @@ namespace CarRentalApi.Entities
 {
     public class CarRentDbContext : DbContext
     {
+
         public CarRentDbContext(DbContextOptions<CarRentDbContext> options)
             : base(options)
         { }
