@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj": {}
+    "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj": {}
   },
   "projects": {
-    "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj": {
+    "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj",
-        "projectName": "CarRentalApi",
-        "projectPath": "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj",
+        "projectUniqueName": "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj",
+        "projectName": "CarRentalBLL",
+        "projectPath": "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\CarRentalBLL.csproj",
         "packagesPath": "C:\\Users\\Kaju\\.nuget\\packages\\",
-        "outputPath": "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalApi\\obj\\",
+        "outputPath": "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalBLL\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Microsoft\\Xamarin\\NuGet\\",
@@ -23,14 +23,14 @@
           "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
-          "netcoreapp3.1"
+          "netstandard2.0"
         ],
         "sources": {
           "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
-          "netcoreapp3.1": {
+          "netstandard2.0": {
             "projectReferences": {}
           }
         },
@@ -41,7 +41,19 @@
         }
       },
       "frameworks": {
-        "netcoreapp3.1": {
+        "netstandard2.0": {
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "NETStandard.Library": {
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[2.0.3, )",
+              "autoReferenced": true
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -52,14 +64,6 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "frameworkReferences": {
-            "Microsoft.AspNetCore.App": {
-              "privateAssets": "none"
-            },
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
           "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
         }
       }
