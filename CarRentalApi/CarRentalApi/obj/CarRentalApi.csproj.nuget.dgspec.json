@@ -1,23 +1,20 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Krystian Kamyszek\\Documents\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj": {}
+    "C:\\Users\\tomek\\Documents\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Krystian Kamyszek\\Documents\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj": {
+    "C:\\Users\\tomek\\Documents\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Krystian Kamyszek\\Documents\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj",
+        "projectUniqueName": "C:\\Users\\tomek\\Documents\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj",
         "projectName": "CarRentalApi",
-        "projectPath": "C:\\Users\\Krystian Kamyszek\\Documents\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj",
-        "packagesPath": "C:\\Users\\Krystian Kamyszek\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Krystian Kamyszek\\Documents\\CarRentalApi\\CarRentalApi\\CarRentalApi\\obj\\",
+        "projectPath": "C:\\Users\\tomek\\Documents\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj",
+        "packagesPath": "C:\\Users\\tomek\\.nuget\\packages\\",
+        "outputPath": "C:\\Users\\tomek\\Documents\\CarRentalApi\\CarRentalApi\\CarRentalApi\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Krystian Kamyszek\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Users\\tomek\\AppData\\Roaming\\NuGet\\NuGet.Config",
           "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
@@ -58,6 +55,10 @@
             "Microsoft.VisualStudio.Web.CodeGeneration.Design": {
               "target": "Package",
               "version": "[3.1.4, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[5.5.0, )"
             }
           },
           "imports": [
@@ -78,7 +79,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.400\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.302\\RuntimeIdentifierGraph.json"
         }
       }
     }
