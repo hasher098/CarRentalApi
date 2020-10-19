@@ -15,5 +15,6 @@ namespace CarRentalApi.Entities
         { }
 
         public DbSet<Car> Cars { get; set; }
+        public DbSet<Pricing> Prices { get; set;}
     }
 }
