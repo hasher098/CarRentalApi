@@ -7,52 +7,52 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using CarRentalApi.Entities;
 
-namespace CarRentalApi
+namespace CarRentalApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class PricesController : ControllerBase
+    public class BlackListsController : ControllerBase
     {
         private readonly CarRentDbContext _context;
 
-        public PricesController(CarRentDbContext context)
+        public BlackListsController(CarRentDbContext context)
         {
             _context = context;
         }
 
-        // GET: api/Prices
+        // GET: api/BlackLists
         [HttpGet]
-        public async Task<ActionResult<IEnumerable<Pricing>>> GetPrices()
+        public async Task<ActionResult<IEnumerable<BlackList>>> GetBlackList()
         {
-            return await _context.Prices.ToListAsync();
+            return await _context.BlackList.ToListAsync();
         }
 
-        // GET: api/Prices/5
+        // GET: api/BlackLists/5
         [HttpGet("{id}")]
-        public async Task<ActionResult<Pricing>> GetPricing(int id)
+        public async Task<ActionResult<BlackList>> GetBlackList(int id)
         {
-            var pricing = await _context.Prices.FindAsync(id);
+            var blackList = await _context.BlackList.FindAsync(id);
 
-            if (pricing == null)
+            if (blackList == null)
             {
                 return NotFound();
             }
 
-            return pricing;
+            return blackList;
         }
 
-        // PUT: api/Prices/5
+        // PUT: api/BlackLists/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPut("{id}")]
-        public async Task<IActionResult> PutPricing(int id, Pricing pricing)
+        public async Task<IActionResult> PutBlackList(int id, BlackList blackList)
         {
-            if (id != pricing.Id)
+            if (id != blackList.Id)
             {
                 return BadRequest();
             }
 
-            _context.Entry(pricing).State = EntityState.Modified;
+            _context.Entry(blackList).State = EntityState.Modified;
 
             try
             {
@@ -60,7 +60,7 @@ namespace CarRentalApi
             }
             catch (DbUpdateConcurrencyException)
             {
-                if (!PricingExists(id))
+                if (!BlackListExists(id))
                 {
                     return NotFound();
                 }
@@ -73,37 +73,37 @@ namespace CarRentalApi
             return NoContent();
         }
 
-        // POST: api/Prices
+        // POST: api/BlackLists
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
         // more details, see https://go.microsoft.com/fwlink/?linkid=2123754.
         [HttpPost]
-        public async Task<ActionResult<Pricing>> PostPricing(Pricing pricing)
+        public async Task<ActionResult<BlackList>> PostBlackList(BlackList blackList)
         {
-            _context.Prices.Add(pricing);
+            _context.BlackList.Add(blackList);
             await _context.SaveChangesAsync();
 
-            return CreatedAtAction("GetPricing", new { id = pricing.Id }, pricing);
+            return CreatedAtAction("GetBlackList", new { id = blackList.Id }, blackList);
         }
 
-        // DELETE: api/Prices/5
+        // DELETE: api/BlackLists/5
         [HttpDelete("{id}")]
-        public async Task<ActionResult<Pricing>> DeletePricing(int id)
+        public async Task<ActionResult<BlackList>> DeleteBlackList(int id)
         {
-            var pricing = await _context.Prices.FindAsync(id);
-            if (pricing == null)
+            var blackList = await _context.BlackList.FindAsync(id);
+            if (blackList == null)
             {
                 return NotFound();
             }
 
-            _context.Prices.Remove(pricing);
+            _context.BlackList.Remove(blackList);
             await _context.SaveChangesAsync();
 
-            return pricing;
+            return blackList;
         }
 
-        private bool PricingExists(int id)
+        private bool BlackListExists(int id)
         {
-            return _context.Prices.Any(e => e.Id == id);
+            return _context.BlackList.Any(e => e.Id == id);
         }
     }
 }
