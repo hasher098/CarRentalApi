@@ -1,21 +1,26 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\przem\\Desktop\\Projekt PAI API\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj": {}
+    "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj": {}
   },
   "projects": {
-    "C:\\Users\\przem\\Desktop\\Projekt PAI API\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj": {
+    "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\przem\\Desktop\\Projekt PAI API\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj",
+        "projectUniqueName": "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj",
         "projectName": "CarRentalApi",
-        "projectPath": "C:\\Users\\przem\\Desktop\\Projekt PAI API\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj",
-        "packagesPath": "C:\\Users\\przem\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\przem\\Desktop\\Projekt PAI API\\CarRentalApi\\CarRentalApi\\obj\\",
+        "projectPath": "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj",
+        "packagesPath": "C:\\Users\\Kaju\\.nuget\\packages\\",
+        "outputPath": "D:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalApi\\obj\\",
         "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Microsoft\\Xamarin\\NuGet\\",
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
         "configFilePaths": [
-          "C:\\Users\\przem\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "C:\\Users\\Kaju\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"

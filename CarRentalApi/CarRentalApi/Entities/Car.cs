@@ -1,3 +1,4 @@
+using Microsoft.Net.Http.Headers;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -26,4 +27,5 @@ using System.ComponentModel.DataAnnotations.Schema;
         public bool RoofRack { get; set; }
         [Required]
         public string BodyType { get; set; }
+        public virtual CarCopy CarCopy { get; set; }
     }

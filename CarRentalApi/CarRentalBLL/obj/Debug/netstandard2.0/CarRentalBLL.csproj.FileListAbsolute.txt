@@ -1,8 +1,0 @@
-D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalBLL\bin\Debug\netstandard2.0\CarRentalBLL.deps.json
-D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalBLL\bin\Debug\netstandard2.0\CarRentalBLL.dll
-D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalBLL\bin\Debug\netstandard2.0\CarRentalBLL.pdb
-D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalBLL\obj\Debug\netstandard2.0\CarRentalBLL.csprojAssemblyReference.cache
-D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalBLL\obj\Debug\netstandard2.0\CarRentalBLL.AssemblyInfoInputs.cache
-D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalBLL\obj\Debug\netstandard2.0\CarRentalBLL.AssemblyInfo.cs
-D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalBLL\obj\Debug\netstandard2.0\CarRentalBLL.dll
-D:\VII sem\projekt grupowy\CarRental\CarRentalApi\CarRentalApi\CarRentalBLL\obj\Debug\netstandard2.0\CarRentalBLL.pdb
