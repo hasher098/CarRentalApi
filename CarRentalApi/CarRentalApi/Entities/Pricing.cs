@@ -11,4 +11,4 @@ using System.ComponentModel.DataAnnotations.Schema;
         public virtual CarCopy CarCopy { get; set; }
         public string Description { get; set; }
         public int PricePerDay { get; set; }
-    }
+}
