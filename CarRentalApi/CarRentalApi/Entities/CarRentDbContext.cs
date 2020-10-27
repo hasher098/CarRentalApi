@@ -19,5 +19,6 @@ namespace CarRentalApi.Entities
         public DbSet<Pricing> Pricings { get; set; }
         public DbSet<Rent> Rents { get; set; }
         public DbSet<BlackList> BlackList { get; set; }
+        public DbSet<ClientDetails> ClientDetails { get; set; }
     }
 }

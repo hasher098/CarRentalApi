@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalApi.Migrations
 {
     [DbContext(typeof(CarRentDbContext))]
-    [Migration("20201021085748_new-tables-+-relations")]
-    partial class newtablesrelations
+    [Migration("20201022110524_database-tables-relations")]
+    partial class databasetablesrelations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -38,6 +38,8 @@ namespace CarRentalApi.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("ClientId");
 
                     b.ToTable("BlackList");
                 });
@@ -118,6 +120,45 @@ namespace CarRentalApi.Migrations
                     b.ToTable("CarCopy");
                 });
 
+            modelBuilder.Entity("CarRentalApi.Entities.ClientDetails", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IDcardNumber")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pesel")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("ClientDetails");
+                });
+
             modelBuilder.Entity("Pricing", b =>
                 {
                     b.Property<int>("Id")
@@ -165,7 +206,18 @@ namespace CarRentalApi.Migrations
 
                     b.HasIndex("CarCopyId");
 
+                    b.HasIndex("ClientId");
+
                     b.ToTable("Rent");
+                });
+
+            modelBuilder.Entity("BlackList", b =>
+                {
+                    b.HasOne("CarRentalApi.Entities.ClientDetails", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("CarCopy", b =>
@@ -191,6 +243,12 @@ namespace CarRentalApi.Migrations
                     b.HasOne("CarCopy", "CarCopy")
                         .WithMany()
                         .HasForeignKey("CarCopyId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("CarRentalApi.Entities.ClientDetails", "Client")
+                        .WithMany()
+                        .HasForeignKey("ClientId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
