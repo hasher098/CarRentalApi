@@ -23,9 +23,13 @@ namespace CarRentalApi.Entities
         public DbSet<Rent> Rents { get; set; }
         public DbSet<BlackList> BlackList { get; set; }
 
+        public DbSet<ClientDetails> ClientDetails { get; set; }
+
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);
         }
+
     }
 }

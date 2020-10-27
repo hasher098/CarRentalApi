@@ -1,3 +1,4 @@
+using CarRentalApi.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -7,6 +8,8 @@ using System.ComponentModel.DataAnnotations.Schema;
         [Key]
         public int Id { get; set; }
         public bool IsBlacklisted { get; set; }
+        [ForeignKey("ClientDetails")]
         public int ClientId { get; set; }
+        public virtual ClientDetails Client { get; set; }
         public string Reason { get; set; }
     }
