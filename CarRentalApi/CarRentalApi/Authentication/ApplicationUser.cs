@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using CarRentalApi.Entities;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,5 +9,6 @@ namespace CarRentalApi.Authentication
 {
     public class ApplicationUser: IdentityUser
     {
+        public virtual ClientDetails ClientDetails { get; set; }
     }
 }

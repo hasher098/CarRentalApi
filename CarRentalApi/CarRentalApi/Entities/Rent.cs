@@ -14,6 +14,10 @@ using System.ComponentModel.DataAnnotations.Schema;
         [ForeignKey("CarCopy")]
         public int CarCopyId { get; set; }
         public CarCopy CarCopy { get; set; }
+        [Required]
+        [Timestamp]
         public DateTime RentDate { get; set; }
+        [Required]
+        [Timestamp]
         public DateTime ReturnDate { get; set; }
     }
