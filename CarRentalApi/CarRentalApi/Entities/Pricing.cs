@@ -6,9 +6,14 @@ using System.ComponentModel.DataAnnotations.Schema;
     {
         [Key]
         public int Id { get; set; }
+        public virtual CarCopy CarCopy { get; set; }
+        [Required]
+        [MaxLength(255)]
+        public string Description { get; set; }
+        [Required]
+        [MaxLength(255)]
+        public int PricePerDay { get; set; }
+        
         [ForeignKey("CarCopy")]
         public int CarCopyId { get; set; }
-        public virtual CarCopy CarCopy { get; set; }
-        public string Description { get; set; }
-        public int PricePerDay { get; set; }
 }

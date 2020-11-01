@@ -1,26 +1,21 @@
 {
   "format": 1,
   "restore": {
-    "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj": {}
+    "E:\\DYSK C\\PROJEKT PAI\\carrentalapi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj": {}
   },
   "projects": {
-    "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj": {
+    "E:\\DYSK C\\PROJEKT PAI\\carrentalapi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj",
+        "projectUniqueName": "E:\\DYSK C\\PROJEKT PAI\\carrentalapi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj",
         "projectName": "CarRentalApi",
-        "projectPath": "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj",
-        "packagesPath": "C:\\Users\\Kaju\\.nuget\\packages\\",
-        "outputPath": "d:\\VII sem\\projekt grupowy\\CarRental\\CarRentalApi\\CarRentalApi\\CarRentalApi\\obj\\",
+        "projectPath": "E:\\DYSK C\\PROJEKT PAI\\carrentalapi\\CarRentalApi\\CarRentalApi\\CarRentalApi.csproj",
+        "packagesPath": "C:\\Users\\Michal\\.nuget\\packages\\",
+        "outputPath": "E:\\DYSK C\\PROJEKT PAI\\carrentalapi\\CarRentalApi\\CarRentalApi\\obj\\",
         "projectStyle": "PackageReference",
-        "fallbackFolders": [
-          "C:\\Microsoft\\Xamarin\\NuGet\\",
-          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
-        ],
         "configFilePaths": [
-          "C:\\Users\\Kaju\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Xamarin.Offline.config"
+          "C:\\Users\\Michal\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "netcoreapp3.1"
@@ -43,6 +38,18 @@
       "frameworks": {
         "netcoreapp3.1": {
           "dependencies": {
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
+            "Microsoft.AspNetCore.Identity": {
+              "target": "Package",
+              "version": "[2.2.0, )"
+            },
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[3.1.9, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[3.1.9, )"
@@ -84,7 +91,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.401\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\3.1.403\\RuntimeIdentifierGraph.json"
         }
       }
     }
