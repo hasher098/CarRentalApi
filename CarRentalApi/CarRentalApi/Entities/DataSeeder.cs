@@ -26,7 +26,7 @@ namespace CarRentalApi.Entities
                          Color = "Czarny",
                          EngineCapacity = "1.4",
                          Seats = 5,
-                         Gearbox = "Manualna",
+                         Gearbox = "M",
                          TrunkCapacity = "400l",
                          RoofRack = false,
                          BodyType = "Hatchback"
@@ -41,7 +41,7 @@ namespace CarRentalApi.Entities
                      Color = "Srebrny",
                      EngineCapacity = "1.0",
                      Seats = 5,
-                     Gearbox = "Manualna",
+                     Gearbox = "M",
                      TrunkCapacity = "768 l",
                      RoofRack = false,
                      BodyType = "Hatchback"
@@ -56,7 +56,7 @@ namespace CarRentalApi.Entities
                       Color = "Niebieski",
                       EngineCapacity = "1.6T",
                       Seats = 5,
-                      Gearbox = "Automatyczna",
+                      Gearbox = "A",
                       TrunkCapacity = "1100l",
                       RoofRack = false,
                       BodyType = "Hatchback"
@@ -71,7 +71,7 @@ namespace CarRentalApi.Entities
                        Color = "Czarny",
                        EngineCapacity = "2.0",
                        Seats = 5,
-                       Gearbox = "Manualna",
+                       Gearbox = "M",
                        TrunkCapacity = "1150l",
                        RoofRack = false,
                        BodyType = "Sedan"
@@ -86,7 +86,7 @@ namespace CarRentalApi.Entities
                        Color = "Czarny",
                        EngineCapacity = "2.0",
                        Seats = 5,
-                       Gearbox = "Manualna",
+                       Gearbox = "M",
                        TrunkCapacity = "1470l",
                        RoofRack = false,
                        BodyType = "Sedan"
