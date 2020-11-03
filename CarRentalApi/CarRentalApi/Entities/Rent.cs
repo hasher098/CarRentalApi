@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
     [   Key]
         public int Id { get; set; }
         [ForeignKey("ClientDetails")]
-        public int ClientId { get; set; }
+        public string ClientId { get; set; }
         public virtual ClientDetails Client { get; set; }
         [ForeignKey("CarCopy")]
         public int CarCopyId { get; set; }
