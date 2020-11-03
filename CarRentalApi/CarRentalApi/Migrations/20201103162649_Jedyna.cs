@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarRentalApi.Migrations
 {
-    public partial class initial : Migration
+    public partial class Jedyna : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -52,40 +52,21 @@ namespace CarRentalApi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Class = table.Column<string>(nullable: false),
-                    Brand = table.Column<string>(nullable: false),
-                    Model = table.Column<string>(nullable: false),
-                    Year = table.Column<int>(nullable: false),
-                    Color = table.Column<string>(nullable: true),
+                    Class = table.Column<string>(maxLength: 255, nullable: false),
+                    Brand = table.Column<string>(maxLength: 255, nullable: false),
+                    Model = table.Column<string>(maxLength: 255, nullable: false),
+                    Year = table.Column<int>(maxLength: 4, nullable: false),
+                    Color = table.Column<string>(maxLength: 255, nullable: true),
                     EngineCapacity = table.Column<string>(nullable: false),
-                    Seats = table.Column<int>(nullable: false),
-                    Gearbox = table.Column<string>(nullable: false),
-                    TrunkCapacity = table.Column<string>(nullable: false),
+                    Seats = table.Column<int>(maxLength: 1, nullable: false),
+                    Gearbox = table.Column<string>(maxLength: 1, nullable: false),
+                    TrunkCapacity = table.Column<string>(maxLength: 10, nullable: false),
                     RoofRack = table.Column<bool>(nullable: false),
-                    BodyType = table.Column<string>(nullable: false)
+                    BodyType = table.Column<string>(maxLength: 20, nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Cars", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "ClientDetails",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    LastName = table.Column<string>(nullable: false),
-                    FirstName = table.Column<string>(nullable: false),
-                    Address = table.Column<string>(nullable: false),
-                    Email = table.Column<string>(nullable: false),
-                    IDcardNumber = table.Column<string>(nullable: false),
-                    Pesel = table.Column<string>(nullable: false),
-                    IsActive = table.Column<bool>(nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_ClientDetails", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -195,12 +176,36 @@ namespace CarRentalApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "ClientDetails",
+                columns: table => new
+                {
+                    Id = table.Column<string>(nullable: false),
+                    LastName = table.Column<string>(maxLength: 255, nullable: false),
+                    FirstName = table.Column<string>(maxLength: 255, nullable: false),
+                    Address = table.Column<string>(maxLength: 255, nullable: false),
+                    IDcardNumber = table.Column<string>(maxLength: 9, nullable: false),
+                    Pesel = table.Column<string>(maxLength: 11, nullable: false),
+                    IsActive = table.Column<bool>(nullable: false),
+                    UserId = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ClientDetails", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_ClientDetails_AspNetUsers_UserId",
+                        column: x => x.UserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CarCopy",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RegistrationNumber = table.Column<string>(nullable: true),
+                    RegistrationNumber = table.Column<string>(maxLength: 8, nullable: false),
                     CarId = table.Column<int>(nullable: false),
                     IsRented = table.Column<bool>(nullable: false)
                 },
@@ -222,8 +227,8 @@ namespace CarRentalApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     IsBlacklisted = table.Column<bool>(nullable: false),
-                    ClientId = table.Column<int>(nullable: false),
-                    Reason = table.Column<string>(nullable: true)
+                    ClientId = table.Column<string>(nullable: true),
+                    Reason = table.Column<string>(maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -233,7 +238,7 @@ namespace CarRentalApi.Migrations
                         column: x => x.ClientId,
                         principalTable: "ClientDetails",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateTable(
@@ -242,9 +247,9 @@ namespace CarRentalApi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CarCopyId = table.Column<int>(nullable: false),
-                    Description = table.Column<string>(nullable: true),
-                    PricePerDay = table.Column<int>(nullable: false)
+                    Description = table.Column<string>(maxLength: 255, nullable: false),
+                    PricePerDay = table.Column<int>(maxLength: 255, nullable: false),
+                    CarCopyId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -263,7 +268,7 @@ namespace CarRentalApi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClientId = table.Column<int>(nullable: false),
+                    ClientId = table.Column<string>(nullable: true),
                     CarCopyId = table.Column<int>(nullable: false),
                     RentDate = table.Column<DateTime>(nullable: false),
                     ReturnDate = table.Column<DateTime>(nullable: false)
@@ -282,7 +287,7 @@ namespace CarRentalApi.Migrations
                         column: x => x.ClientId,
                         principalTable: "ClientDetails",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.Cascade);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -336,6 +341,13 @@ namespace CarRentalApi.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
+                name: "IX_ClientDetails_UserId",
+                table: "ClientDetails",
+                column: "UserId",
+                unique: true,
+                filter: "[UserId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_Pricing_CarCopyId",
                 table: "Pricing",
                 column: "CarCopyId",
@@ -382,9 +394,6 @@ namespace CarRentalApi.Migrations
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "AspNetUsers");
-
-            migrationBuilder.DropTable(
                 name: "CarCopy");
 
             migrationBuilder.DropTable(
@@ -392,6 +401,9 @@ namespace CarRentalApi.Migrations
 
             migrationBuilder.DropTable(
                 name: "Cars");
+
+            migrationBuilder.DropTable(
+                name: "AspNetUsers");
         }
     }
 }
