@@ -13,7 +13,7 @@ namespace CarRentalApi.Entities
     public class ClientDetails
     {
         [Key]
-        public int Id { get; set; }
+        public string Id { get; set; }
         [Required]
         [MaxLength(255)]
         public string LastName { get; set; }

@@ -10,7 +10,7 @@ using System.ComponentModel.DataAnnotations.Schema;
         [Required]
         public bool IsBlacklisted { get; set; }
         [ForeignKey("ClientDetails")]
-        public int ClientId { get; set; }
+        public string ClientId { get; set; }
         public virtual ClientDetails Client { get; set; }
         [Required]
         [MaxLength(255)]
