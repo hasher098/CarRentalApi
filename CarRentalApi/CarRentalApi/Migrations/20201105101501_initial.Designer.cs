@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalApi.Migrations
 {
     [DbContext(typeof(CarRentDbContext))]
-    [Migration("20201103162649_Jedyna")]
-    partial class Jedyna
+    [Migration("20201105101501_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
