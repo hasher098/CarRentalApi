@@ -26,8 +26,8 @@ namespace CarRentalApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
+                    b.Property<string>("ClientId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsBlacklisted")
                         .HasColumnType("bit");
@@ -198,10 +198,8 @@ namespace CarRentalApi.Migrations
 
             modelBuilder.Entity("CarRentalApi.Entities.ClientDetails", b =>
                 {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                    b.Property<string>("Id")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("Address")
                         .IsRequired()
@@ -411,8 +409,8 @@ namespace CarRentalApi.Migrations
                     b.Property<int>("CarCopyId")
                         .HasColumnType("int");
 
-                    b.Property<int>("ClientId")
-                        .HasColumnType("int");
+                    b.Property<string>("ClientId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("RentDate")
                         .IsConcurrencyToken()
@@ -437,9 +435,7 @@ namespace CarRentalApi.Migrations
                 {
                     b.HasOne("CarRentalApi.Entities.ClientDetails", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClientId");
                 });
 
             modelBuilder.Entity("CarCopy", b =>
@@ -528,9 +524,7 @@ namespace CarRentalApi.Migrations
 
                     b.HasOne("CarRentalApi.Entities.ClientDetails", "Client")
                         .WithMany()
-                        .HasForeignKey("ClientId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("ClientId");
                 });
 #pragma warning restore 612, 618
         }
