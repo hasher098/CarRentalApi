@@ -7,8 +7,9 @@ using System.ComponentModel.DataAnnotations.Schema;
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }
-        [ForeignKey("CarCopy")]
-        public int CarCopyId { get; set; }
+        [Required]
+        [MaxLength(20)]
+        public string Class { get; set; }
         public virtual CarCopy CarCopy { get; set; }
         [Required]
         [MaxLength(20)]
@@ -19,5 +20,6 @@ using System.ComponentModel.DataAnnotations.Schema;
         [Required]
         public int PricePerDay { get; set; }
 
-        
+        [ForeignKey("CarCopy")]
+        public int CarCopyId { get; set; }
 }
