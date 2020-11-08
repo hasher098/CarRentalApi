@@ -26,7 +26,7 @@ using System.ComponentModel.DataAnnotations.Schema;
         [MaxLength(1)]
         public int Seats { get; set; }
         [Required]
-        [MaxLength(1)]
+        [MaxLength(2)]
         public string Gearbox { get; set; }
         [Required]
         [MaxLength(10)]

@@ -76,8 +76,8 @@ namespace CarRentalApi.Migrations
 
                     b.Property<string>("Gearbox")
                         .IsRequired()
-                        .HasColumnType("nvarchar(1)")
-                        .HasMaxLength(1);
+                        .HasColumnType("nvarchar(2)")
+                        .HasMaxLength(2);
 
                     b.Property<string>("Model")
                         .IsRequired()
@@ -382,14 +382,18 @@ namespace CarRentalApi.Migrations
                     b.Property<int>("CarCopyId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Class")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(20)")
+                        .HasMaxLength(20);
+
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(255)")
                         .HasMaxLength(255);
 
                     b.Property<int>("PricePerDay")
-                        .HasColumnType("int")
-                        .HasMaxLength(255);
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 

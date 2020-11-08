@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarRentalApi.Migrations
 {
-    public partial class initial : Migration
+    public partial class migrate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -59,7 +59,7 @@ namespace CarRentalApi.Migrations
                     Color = table.Column<string>(maxLength: 255, nullable: true),
                     EngineCapacity = table.Column<string>(nullable: false),
                     Seats = table.Column<int>(maxLength: 1, nullable: false),
-                    Gearbox = table.Column<string>(maxLength: 1, nullable: false),
+                    Gearbox = table.Column<string>(maxLength: 2, nullable: false),
                     TrunkCapacity = table.Column<string>(maxLength: 10, nullable: false),
                     RoofRack = table.Column<bool>(nullable: false),
                     BodyType = table.Column<string>(maxLength: 20, nullable: false)
@@ -247,8 +247,9 @@ namespace CarRentalApi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Class = table.Column<string>(maxLength: 20, nullable: false),
                     Description = table.Column<string>(maxLength: 255, nullable: false),
-                    PricePerDay = table.Column<int>(maxLength: 255, nullable: false),
+                    PricePerDay = table.Column<int>(nullable: false),
                     CarCopyId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
