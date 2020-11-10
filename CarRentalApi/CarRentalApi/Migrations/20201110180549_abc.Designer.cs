@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalApi.Migrations
 {
     [DbContext(typeof(CarRentDbContext))]
-    [Migration("20201106111241_migrate")]
-    partial class migrate
+    [Migration("20201110180549_abc")]
+    partial class abc
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,7 @@ namespace CarRentalApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("ClientId")
+                    b.Property<string>("AspNetUsers")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsBlacklisted")
@@ -41,7 +41,9 @@ namespace CarRentalApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("AspNetUsers")
+                        .IsUnique()
+                        .HasFilter("[AspNetUsers] IS NOT NULL");
 
                     b.ToTable("BlackList");
                 });
@@ -141,6 +143,9 @@ namespace CarRentalApi.Migrations
                     b.Property<int>("AccessFailedCount")
                         .HasColumnType("int");
 
+                    b.Property<string>("Address")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("ConcurrencyStamp")
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
@@ -151,6 +156,19 @@ namespace CarRentalApi.Migrations
 
                     b.Property<bool>("EmailConfirmed")
                         .HasColumnType("bit");
+
+                    b.Property<string>("FirstName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("IDcardNumber")
+                        .HasColumnType("nvarchar(9)")
+                        .HasMaxLength(9);
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("LastName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("LockoutEnabled")
                         .HasColumnType("bit");
@@ -168,6 +186,10 @@ namespace CarRentalApi.Migrations
 
                     b.Property<string>("PasswordHash")
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Pesel")
+                        .HasColumnType("nvarchar(11)")
+                        .HasMaxLength(11);
 
                     b.Property<string>("PhoneNumber")
                         .HasColumnType("nvarchar(max)");
@@ -196,51 +218,6 @@ namespace CarRentalApi.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers");
-                });
-
-            modelBuilder.Entity("CarRentalApi.Entities.ClientDetails", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Address")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
-
-                    b.Property<string>("FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
-
-                    b.Property<string>("IDcardNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(9)")
-                        .HasMaxLength(9);
-
-                    b.Property<bool>("IsActive")
-                        .HasColumnType("bit");
-
-                    b.Property<string>("LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
-
-                    b.Property<string>("Pesel")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(11)")
-                        .HasMaxLength(11);
-
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId")
-                        .IsUnique()
-                        .HasFilter("[UserId] IS NOT NULL");
-
-                    b.ToTable("ClientDetails");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -412,11 +389,11 @@ namespace CarRentalApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("AspNetUsers")
+                        .HasColumnType("nvarchar(450)");
+
                     b.Property<int>("CarCopyId")
                         .HasColumnType("int");
-
-                    b.Property<string>("ClientId")
-                        .HasColumnType("nvarchar(450)");
 
                     b.Property<DateTime>("RentDate")
                         .IsConcurrencyToken()
@@ -430,18 +407,20 @@ namespace CarRentalApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarCopyId");
+                    b.HasIndex("AspNetUsers")
+                        .IsUnique()
+                        .HasFilter("[AspNetUsers] IS NOT NULL");
 
-                    b.HasIndex("ClientId");
+                    b.HasIndex("CarCopyId");
 
                     b.ToTable("Rent");
                 });
 
             modelBuilder.Entity("BlackList", b =>
                 {
-                    b.HasOne("CarRentalApi.Entities.ClientDetails", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId");
+                    b.HasOne("CarRentalApi.Authentication.ApplicationUser", "ApplicationUser")
+                        .WithOne("BlackList")
+                        .HasForeignKey("BlackList", "AspNetUsers");
                 });
 
             modelBuilder.Entity("CarCopy", b =>
@@ -451,13 +430,6 @@ namespace CarRentalApi.Migrations
                         .HasForeignKey("CarCopy", "CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-                });
-
-            modelBuilder.Entity("CarRentalApi.Entities.ClientDetails", b =>
-                {
-                    b.HasOne("CarRentalApi.Authentication.ApplicationUser", "ApplicationUser")
-                        .WithOne("ClientDetails")
-                        .HasForeignKey("CarRentalApi.Entities.ClientDetails", "UserId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -522,15 +494,15 @@ namespace CarRentalApi.Migrations
 
             modelBuilder.Entity("Rent", b =>
                 {
+                    b.HasOne("CarRentalApi.Authentication.ApplicationUser", "ApplicationUser")
+                        .WithOne("Rent")
+                        .HasForeignKey("Rent", "AspNetUsers");
+
                     b.HasOne("CarCopy", "CarCopy")
                         .WithMany()
                         .HasForeignKey("CarCopyId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("CarRentalApi.Entities.ClientDetails", "Client")
-                        .WithMany()
-                        .HasForeignKey("ClientId");
                 });
 #pragma warning restore 612, 618
         }

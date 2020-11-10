@@ -1,3 +1,4 @@
+using CarRentalApi.Authentication;
 using CarRentalApi.Entities;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,9 +10,9 @@ using System.ComponentModel.DataAnnotations.Schema;
         public int Id { get; set; }
         [Required]
         public bool IsBlacklisted { get; set; }
-        [ForeignKey("ClientDetails")]
-        public string ClientId { get; set; }
-        public virtual ClientDetails Client { get; set; }
+        [ForeignKey("AspNetUsers")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
+        
         [Required]
         [MaxLength(255)]
         public string Reason { get; set; }
