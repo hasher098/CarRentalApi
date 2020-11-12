@@ -53,21 +53,6 @@ namespace CarRentalApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BlackList",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IsBlacklisted = table.Column<bool>(nullable: false),
-                    ClientId = table.Column<string>(nullable: true),
-                    Reason = table.Column<string>(maxLength: 255, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BlackList", x => x.Id);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Cars",
                 columns: table => new
                 {
@@ -197,6 +182,27 @@ namespace CarRentalApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BlackList",
+                columns: table => new
+                {
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BlacklistedUserId = table.Column<string>(nullable: true),
+                    IsBlacklisted = table.Column<bool>(nullable: false),
+                    Reason = table.Column<string>(maxLength: 255, nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_BlackList", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_BlackList_AspNetUsers_BlacklistedUserId",
+                        column: x => x.BlacklistedUserId,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "CarCopy",
                 columns: table => new
                 {
@@ -223,10 +229,10 @@ namespace CarRentalApi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CarCopyId = table.Column<int>(nullable: false),
                     Class = table.Column<string>(maxLength: 20, nullable: false),
                     Description = table.Column<string>(maxLength: 255, nullable: false),
-                    PricePerDay = table.Column<int>(nullable: false),
-                    CarCopyId = table.Column<int>(nullable: false)
+                    PricePerDay = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -245,7 +251,7 @@ namespace CarRentalApi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClientId = table.Column<string>(nullable: true),
+                    AspNetUsers = table.Column<string>(nullable: true),
                     CarCopyId = table.Column<int>(nullable: false),
                     RentDate = table.Column<DateTime>(nullable: false),
                     ReturnDate = table.Column<DateTime>(nullable: false)
@@ -253,6 +259,12 @@ namespace CarRentalApi.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Rent", x => x.Id);
+                    table.ForeignKey(
+                        name: "FK_Rent_AspNetUsers_AspNetUsers",
+                        column: x => x.AspNetUsers,
+                        principalTable: "AspNetUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Rent_CarCopy_CarCopyId",
                         column: x => x.CarCopyId,
@@ -301,6 +313,13 @@ namespace CarRentalApi.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
+                name: "IX_BlackList_BlacklistedUserId",
+                table: "BlackList",
+                column: "BlacklistedUserId",
+                unique: true,
+                filter: "[BlacklistedUserId] IS NOT NULL");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_CarCopy_CarId",
                 table: "CarCopy",
                 column: "CarId",
@@ -311,6 +330,13 @@ namespace CarRentalApi.Migrations
                 table: "Pricing",
                 column: "CarCopyId",
                 unique: true);
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Rent_AspNetUsers",
+                table: "Rent",
+                column: "AspNetUsers",
+                unique: true,
+                filter: "[AspNetUsers] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Rent_CarCopyId",

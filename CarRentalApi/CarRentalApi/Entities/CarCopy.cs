@@ -4,7 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 [Table("CarCopy")]
     public class CarCopy
     {
-        [Key]
+    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+    [Key]
+        
         public int Id { get; set; }
         [Required]
         [MaxLength(8),MinLength(7)]

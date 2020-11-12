@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalApi.Migrations
 {
     [DbContext(typeof(CarRentDbContext))]
-    [Migration("20201110180549_abc")]
-    partial class abc
+    [Migration("20201112170427_initial")]
+    partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -28,7 +28,7 @@ namespace CarRentalApi.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AspNetUsers")
+                    b.Property<string>("BlacklistedUserId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<bool>("IsBlacklisted")
@@ -41,9 +41,9 @@ namespace CarRentalApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("AspNetUsers")
+                    b.HasIndex("BlacklistedUserId")
                         .IsUnique()
-                        .HasFilter("[AspNetUsers] IS NOT NULL");
+                        .HasFilter("[BlacklistedUserId] IS NOT NULL");
 
                     b.ToTable("BlackList");
                 });
@@ -420,7 +420,7 @@ namespace CarRentalApi.Migrations
                 {
                     b.HasOne("CarRentalApi.Authentication.ApplicationUser", "ApplicationUser")
                         .WithOne("BlackList")
-                        .HasForeignKey("BlackList", "AspNetUsers");
+                        .HasForeignKey("BlackList", "BlacklistedUserId");
                 });
 
             modelBuilder.Entity("CarCopy", b =>
