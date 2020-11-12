@@ -1,5 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
 [Table("Pricing")]
     public class Pricing
@@ -9,7 +10,8 @@ using System.ComponentModel.DataAnnotations.Schema;
         public int Id { get; set; }
         [ForeignKey("CarCopy")]
         public int CarCopyId { get; set; }
-        public virtual CarCopy CarCopy { get; set; }
+    [JsonIgnore]
+    public virtual CarCopy CarCopy { get; set; }
         [Required]
         [MaxLength(20)]
         public string Class { get; set; }

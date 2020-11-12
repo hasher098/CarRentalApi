@@ -133,6 +133,47 @@ namespace CarRentalApi.Controllers
             return Unauthorized();
             
         }
+        [HttpPost, Route("UserEdit")]
+         public async Task<IActionResult> UserEdit(string id, string LastName,string FirstName, string pesel,
+            string Adress,string IdcardNumber)
+        {
+            var user = await userManager.FindByIdAsync(id);
+            if (user == null)
+            {
+                return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
+            }
+
+            if (user.LastName != LastName)
+            {
+                user.LastName = LastName;
+            }
+            if (user.FirstName != FirstName)
+            {
+                user.FirstName = FirstName;
+            }
+            if (user.Address != Adress)
+            {
+                user.Address = Adress;
+            }
+            if (user.Pesel != pesel)
+            {
+                user.Pesel = pesel;
+            }
+            if(user.IDcardNumber != IdcardNumber)
+            {
+                user.IDcardNumber = IdcardNumber;
+            }
+            if(user.IsActive == false)
+            {
+                user.IsActive = true;
+            }
+
+            await userManager.UpdateAsync(user);
+
+            return NoContent();
+
+
+        }
 
     }
 }

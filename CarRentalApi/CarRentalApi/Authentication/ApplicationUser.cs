@@ -1,6 +1,7 @@
 ﻿using CarRentalApi.Entities;
 using Microsoft.AspNetCore.Identity;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace CarRentalApi.Authentication
 {
@@ -20,8 +21,9 @@ namespace CarRentalApi.Authentication
         public string Pesel { get; set; }
 
         public bool IsActive { get; set; }
-
+        [JsonIgnore]
         public virtual BlackList BlackList { get; set; }
+        [JsonIgnore]
         public virtual Rent Rent { get; set; }
 
     }

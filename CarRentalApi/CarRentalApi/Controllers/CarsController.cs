@@ -40,6 +40,14 @@ namespace CarRentalApi
 
             return car;
         }
+        [HttpGet, Route("AvailableCars")]
+        public async Task<ActionResult<IEnumerable<Car>>> GetAvailableCars()
+        {
+            var cars = from t in _context.Cars.Include(c => c.CarCopy) select t;
+            cars = cars.Where(s => s.CarCopy.IsRented == true);
+
+            return await cars.ToListAsync();
+        }
 
         // PUT: api/Cars/5
         // To protect from overposting attacks, enable the specific properties you want to bind to, for
@@ -84,6 +92,7 @@ namespace CarRentalApi
 
             return CreatedAtAction("GetCar", new { id = car.Id }, car);
         }
+
 
         // DELETE: api/Cars/5
         [HttpDelete("{id}")]
