@@ -1,8 +1,9 @@
 using Microsoft.Net.Http.Headers;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
+using System.Text.Json.Serialization;
 
-    [Table("Cars")]
+[Table("Cars")]
     public class Car
     {
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -37,5 +38,7 @@ using System.ComponentModel.DataAnnotations.Schema;
         [Required]
         [MaxLength(20)]
         public string BodyType { get; set; }
-        public virtual CarCopy CarCopy { get; set; }
+
+    [JsonIgnore]
+    public virtual CarCopy CarCopy { get; set; }
     }

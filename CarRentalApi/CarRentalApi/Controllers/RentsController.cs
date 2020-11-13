@@ -105,5 +105,32 @@ namespace CarRentalApi.Controllers
         {
             return _context.Rents.Any(e => e.Id == id);
         }
+
+        [HttpPost,Route("RentCar")]
+        public async Task<ActionResult<Rent>> NewRent(string userId, int carCopyId, DateTime RentDate, DateTime ReturnDate)
+        {
+            var ids = new Random().Next();
+            if (!RentExists(ids))
+            {
+                var rent = new Rent
+                {
+                    Id = ids,
+                    UserID = userId,
+                    CarCopyId = carCopyId,
+                    RentDate = RentDate,
+                    ReturnDate = ReturnDate
+                };
+                _context.Rents.Add(rent);
+
+                var isRented = await _context.CarCopies.FindAsync(carCopyId);
+                isRented.IsRented = true;
+                _context.CarCopies.Update(isRented);
+            }
+
+
+            return  NoContent();
+
+                
+        }
     }
 }
