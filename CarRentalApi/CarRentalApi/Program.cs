@@ -20,7 +20,7 @@ namespace CarRentalApi
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
-
+/*
                 try
                 {
                     DataSeeder.Initialize(services);
@@ -30,6 +30,7 @@ namespace CarRentalApi
                     var logger = services.GetRequiredService<ILogger<Program>>();
                     logger.LogError(ex, "An error occurred seeding the DB.");
                 }
+*/
             }
 
             host.Run();

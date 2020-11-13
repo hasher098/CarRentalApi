@@ -39,7 +39,13 @@ namespace CarRentalApi.Migrations
                     TwoFactorEnabled = table.Column<bool>(nullable: false),
                     LockoutEnd = table.Column<DateTimeOffset>(nullable: true),
                     LockoutEnabled = table.Column<bool>(nullable: false),
-                    AccessFailedCount = table.Column<int>(nullable: false)
+                    AccessFailedCount = table.Column<int>(nullable: false),
+                    LastName = table.Column<string>(nullable: true),
+                    FirstName = table.Column<string>(nullable: true),
+                    Address = table.Column<string>(nullable: true),
+                    IDcardNumber = table.Column<string>(maxLength: 9, nullable: true),
+                    Pesel = table.Column<string>(maxLength: 11, nullable: true),
+                    IsActive = table.Column<bool>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -176,24 +182,21 @@ namespace CarRentalApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ClientDetails",
+                name: "BlackList",
                 columns: table => new
                 {
-                    Id = table.Column<string>(nullable: false),
-                    LastName = table.Column<string>(maxLength: 255, nullable: false),
-                    FirstName = table.Column<string>(maxLength: 255, nullable: false),
-                    Address = table.Column<string>(maxLength: 255, nullable: false),
-                    IDcardNumber = table.Column<string>(maxLength: 9, nullable: false),
-                    Pesel = table.Column<string>(maxLength: 11, nullable: false),
-                    IsActive = table.Column<bool>(nullable: false),
-                    UserId = table.Column<string>(nullable: true)
+                    Id = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BlacklistedUserId = table.Column<string>(nullable: true),
+                    IsBlacklisted = table.Column<bool>(nullable: false),
+                    Reason = table.Column<string>(maxLength: 255, nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ClientDetails", x => x.Id);
+                    table.PrimaryKey("PK_BlackList", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ClientDetails_AspNetUsers_UserId",
-                        column: x => x.UserId,
+                        name: "FK_BlackList_AspNetUsers_BlacklistedUserId",
+                        column: x => x.BlacklistedUserId,
                         principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
@@ -205,7 +208,7 @@ namespace CarRentalApi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    RegistrationNumber = table.Column<string>(maxLength: 8, nullable: false),
+                    RegistrationNumber = table.Column<string>(maxLength: 10, nullable: false),
                     CarId = table.Column<int>(nullable: false),
                     IsRented = table.Column<bool>(nullable: false)
                 },
@@ -221,36 +224,15 @@ namespace CarRentalApi.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "BlackList",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    IsBlacklisted = table.Column<bool>(nullable: false),
-                    ClientId = table.Column<string>(nullable: true),
-                    Reason = table.Column<string>(maxLength: 255, nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_BlackList", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_BlackList_ClientDetails_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "ClientDetails",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Pricing",
                 columns: table => new
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    CarCopyId = table.Column<int>(nullable: false),
                     Class = table.Column<string>(maxLength: 20, nullable: false),
                     Description = table.Column<string>(maxLength: 255, nullable: false),
-                    PricePerDay = table.Column<int>(nullable: false),
-                    CarCopyId = table.Column<int>(nullable: false)
+                    PricePerDay = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
@@ -269,7 +251,7 @@ namespace CarRentalApi.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ClientId = table.Column<string>(nullable: true),
+                    UserID = table.Column<string>(nullable: true),
                     CarCopyId = table.Column<int>(nullable: false),
                     RentDate = table.Column<DateTime>(nullable: false),
                     ReturnDate = table.Column<DateTime>(nullable: false)
@@ -284,11 +266,103 @@ namespace CarRentalApi.Migrations
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_Rent_ClientDetails_ClientId",
-                        column: x => x.ClientId,
-                        principalTable: "ClientDetails",
+                        name: "FK_Rent_AspNetUsers_UserID",
+                        column: x => x.UserID,
+                        principalTable: "AspNetUsers",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Address", "ConcurrencyStamp", "Email", "EmailConfirmed", "FirstName", "IDcardNumber", "IsActive", "LastName", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "Pesel", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { "b889e9e9-0b5d-453f-9363-e93637b854aa", 0, null, "7db6a340-5be5-4d4e-9e66-0cfcd3cafed3", "Nowak@car.pl", true, null, null, false, null, true, null, "NOWAK@CAR.PL", "NOWAK", "AQAAAAEAACcQAAAAEFXXrcu6Ye/fiHYpciyJvI4YJpii/DoUSonWk8MDmANEMmj6CWd0/4BWilxU5qrVXQ==", null, null, false, "C6SFYJKYII3YIC3UENBIFAIUQTSLSEXZ", false, "Nowak" },
+                    { "8399119f-568a-48a8-9fb1-d6a1f451f203", 0, null, "dcb43428-689a-4a8a-b8e6-dcdb335f5ab3", "Admin@car.pl", true, null, null, false, null, true, null, "ADMIN@CAR.PL", "ADMIN", "AQAAAAEAACcQAAAAEJvecAD/HZhoJ9CP2U7W1fTqi03oqb7VOp0kMEtvLcGtQtJmb+/mRK9t2jakVFjymw==", null, null, false, "JRO5CVOZMDY4Z2SLAFAUVRMKZRC37KYY", false, "Admin" },
+                    { "6bb1647e-c2f3-4def-a875-32644e0b2b9f", 0, null, "a5ad219f-a9f2-496b-bf0c-8c2a497b9e3e", "Kowalski@car.pl", true, null, null, false, null, true, null, "KOWALSKI@CAR.PL", "KOWALSKI", "AQAAAAEAACcQAAAAEADelhIMbQU6jfcAMsBqJQTVDiaThzjbTdIfjK2QWJNrTRzo2SY35zKu40IsY/nExg==", null, null, false, "NF4PUWRF3ZAADUYZ4NGTF2HESVLTQI7O", false, "Kowalski" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Cars",
+                columns: new[] { "Id", "BodyType", "Brand", "Class", "Color", "EngineCapacity", "Gearbox", "Model", "RoofRack", "Seats", "TrunkCapacity", "Year" },
+                values: new object[,]
+                {
+                    { 25, "SUV", "Audi", "J", "Czarny", "3.0 TDI", "M", "Q7", true, 5, "1930L", 2017 },
+                    { 24, "Minivan", "Ford", "M", "Czarny", "2.0 Ecoblue", "AT", "Galaxy", false, 5, "2000L", 2017 },
+                    { 23, "Van", "Seat", "M", "Srebrny", "2.0 TDI", "M", "Alhambra", false, 5, "2000L", 2018 },
+                    { 22, "Van", "Volkswagen", "M", "Czarny", "2.0 TDI", "AT", "Sharan", false, 7, "2000L", 2016 },
+                    { 21, "Cabriolet", "BMW", "H", "Czarny", "2.5", "M", "Z4", false, 5, "280L", 2016 },
+                    { 20, "Cabriolet", "Audi", "H", "Biały", "2.0 TFSI", "AT", "TT", false, 5, "600L", 2015 },
+                    { 19, "Coupe", "Audi", "S", "Niebieski", "5.2", "AT", "R8", false, 5, "---", 2018 },
+                    { 18, "Coupe", "Lamborghini", "S", "Żółty", "6.5 V12", "AT", "Aventador", false, 5, "1450L", 2016 },
+                    { 17, "Hatchback", "Audi", "C", "Czarny", "2.0 TDI", "AT", "A3", false, 5, "1250L", 2014 },
+                    { 16, "Hatchback", "BMW", "C", "Czarny", "2.0 D", "M", "Seria 1", false, 5, "1280L", 2013 },
+                    { 15, "Hatchback", "Fiat", "A", "Biały", "1.0", "M", "Panda", false, 5, "1000L", 2017 },
+                    { 14, "Sedan", "Audi", "S", "Czarny", "5.0 V10 TFSI", "AT", "RS6", false, 5, "1500L", 2010 },
+                    { 12, "Sedan", "Audi", "F", "Czarny", "4.2 TDI", "AT", "A8", false, 5, "1700L", 2016 },
+                    { 11, "Sedan", "Ford", "D", "Czarny", "2.0 TDCi", "M", "Mondeo", false, 5, "1450L", 2016 },
+                    { 10, "Kombi", "Mazda", "D", "Czerwony", "2.0 Skyaktiv", "AT", "6", true, 5, "1400L", 2015 },
+                    { 9, "Kombi", "Volkswagen", "D", "Czarny", "2.0 TSI", "M", "Passat", true, 5, "1400L", 2013 },
+                    { 8, "Hatchback", "Volkswagen", "B", "Niebieski", "2.0 TSI", "AT", "Golf", false, 5, "800L", 2017 },
+                    { 7, "Hatchback", "Nissan", "A", "Czerwony", "1.0", "M", "Micra", false, 5, "800L", 2015 },
+                    { 6, "Hatchback", "Nissan", "A", "Czerwony", "1.0", "M", "Micra", false, 5, "800L", 2015 },
+                    { 5, "Sedan", "Opel", "D", "Czarny", "2.0", "M", "Insignia", false, 5, "1470L", 2016 },
+                    { 4, "Sedan", "Volkswagen", "D", "Czarny", "2.0", "M", "Passat", false, 5, "1150L", 2016 },
+                    { 3, "Hatchback", "Opel", "B", "Niebieski", "1.6 T", "A", "Corsa", false, 5, "1100L", 2010 },
+                    { 2, "Hatchback", "Toyota", "B", "Srebrny", "1.0", "M", "Yaris", false, 5, "768L", 2015 },
+                    { 13, "Kombi", "Audi", "F", "Czarny", "3.0 TDI", "AT", "A6", true, 5, "1570L", 2014 },
+                    { 1, "Hatchback", "Kia", "B", "Czarny", "1.4", "M", "Rio", false, 5, "400L", 2012 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "BlackList",
+                columns: new[] { "Id", "BlacklistedUserId", "IsBlacklisted", "Reason" },
+                values: new object[] { 1, "b889e9e9-0b5d-453f-9363-e93637b854aa", true, "Ukradł drzwi" });
+
+            migrationBuilder.InsertData(
+                table: "CarCopy",
+                columns: new[] { "Id", "CarId", "IsRented", "RegistrationNumber" },
+                values: new object[,]
+                {
+                    { 1, 1, true, "ERA 2137P" },
+                    { 2, 2, true, "SC 12345" },
+                    { 3, 3, false, "SCZ 1523A" },
+                    { 4, 4, true, "SKL S8421" },
+                    { 5, 5, true, "SLU 67123" },
+                    { 6, 6, false, "EPJ AS128" },
+                    { 7, 7, false, "EL R2321A" },
+                    { 8, 8, true, "SK 9632A" },
+                    { 9, 9, false, "SB 123123" },
+                    { 10, 10, false, "WI 48235" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Pricing",
+                columns: new[] { "Id", "CarCopyId", "Class", "Description", "PricePerDay" },
+                values: new object[,]
+                {
+                    { 10, 1, "M", "Auto typu VAN", 300 },
+                    { 6, 2, "F", "Auto luksusowe", 500 },
+                    { 4, 3, "D", "Auto klasy średniej", 200 },
+                    { 2, 4, "B", "Auto miejskie", 100 },
+                    { 3, 5, "C", "Auto typu Kompakt", 150 },
+                    { 5, 7, "E", "Auto klasy wyższej", 350 },
+                    { 8, 8, "H", "Auto typu Kabriolet", 250 },
+                    { 9, 9, "J", "Auto terenowe", 400 },
+                    { 7, 10, "S", "Auto sportowe", 500 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Rent",
+                columns: new[] { "Id", "CarCopyId", "RentDate", "ReturnDate", "UserID" },
+                values: new object[,]
+                {
+                    { 1, 1, new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 2, 2, new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 3, 3, new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 4, 4, new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), null },
+                    { 5, 5, new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "6bb1647e-c2f3-4def-a875-32644e0b2b9f" }
                 });
 
             migrationBuilder.CreateIndex(
@@ -331,22 +405,17 @@ namespace CarRentalApi.Migrations
                 filter: "[NormalizedUserName] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
-                name: "IX_BlackList_ClientId",
+                name: "IX_BlackList_BlacklistedUserId",
                 table: "BlackList",
-                column: "ClientId");
+                column: "BlacklistedUserId",
+                unique: true,
+                filter: "[BlacklistedUserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_CarCopy_CarId",
                 table: "CarCopy",
                 column: "CarId",
                 unique: true);
-
-            migrationBuilder.CreateIndex(
-                name: "IX_ClientDetails_UserId",
-                table: "ClientDetails",
-                column: "UserId",
-                unique: true,
-                filter: "[UserId] IS NOT NULL");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pricing_CarCopyId",
@@ -360,9 +429,11 @@ namespace CarRentalApi.Migrations
                 column: "CarCopyId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Rent_ClientId",
+                name: "IX_Rent_UserID",
                 table: "Rent",
-                column: "ClientId");
+                column: "UserID",
+                unique: true,
+                filter: "[UserID] IS NOT NULL");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -398,13 +469,10 @@ namespace CarRentalApi.Migrations
                 name: "CarCopy");
 
             migrationBuilder.DropTable(
-                name: "ClientDetails");
+                name: "AspNetUsers");
 
             migrationBuilder.DropTable(
                 name: "Cars");
-
-            migrationBuilder.DropTable(
-                name: "AspNetUsers");
         }
     }
 }
