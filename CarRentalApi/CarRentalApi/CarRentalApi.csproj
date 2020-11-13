@@ -6,12 +6,6 @@
 
   <ItemGroup>
     <Compile Remove="Entities\DataSeeder.cs" />
-    <Compile Remove="Migrations\20201112171856_seedy.cs" />
-    <Compile Remove="Migrations\20201112171856_seedy.Designer.cs" />
-    <Compile Remove="Migrations\20201112172145_seedy.cs" />
-    <Compile Remove="Migrations\20201112172145_seedy.Designer.cs" />
-    <Compile Remove="Migrations\20201112172538_seedy.cs" />
-    <Compile Remove="Migrations\20201112172538_seedy.Designer.cs" />
   </ItemGroup>
 
   <ItemGroup>

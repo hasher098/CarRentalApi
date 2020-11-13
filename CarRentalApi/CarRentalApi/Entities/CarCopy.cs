@@ -9,7 +9,7 @@ using System.ComponentModel.DataAnnotations.Schema;
         
         public int Id { get; set; }
         [Required]
-        [MaxLength(8),MinLength(7)]
+        [MaxLength(10)]
         public string RegistrationNumber { get; set; }
         //numer rejestracyjny nie tylko zawiera liczby, dlatego int raczej siê tu nie przyda
         [ForeignKey("Car")]
