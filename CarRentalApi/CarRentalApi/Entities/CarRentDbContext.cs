@@ -154,18 +154,18 @@ namespace CarRentalApi.Entities
                 new CarCopy { Id = 10, RegistrationNumber = "WI 48235", CarId = 10, IsRented = false }
 
                 );
-            builder.Entity<Pricing>().HasData(
-               new Pricing { Id = 1, CarCopyId = 1, Class = "A", Description = "Mały samochód", PricePerDay = 50 },
-               new Pricing { Id = 2, CarCopyId = 4, Class = "B", Description = "Auto miejskie", PricePerDay = 100 },
-               new Pricing { Id = 3, CarCopyId = 5, Class = "C", Description = "Auto typu Kompakt", PricePerDay = 150 },
-               new Pricing { Id = 4, CarCopyId = 3, Class = "D", Description = "Auto klasy średniej", PricePerDay = 200 },
-               new Pricing { Id = 5, CarCopyId = 7, Class = "E", Description = "Auto klasy wyższej", PricePerDay = 350 },
-               new Pricing { Id = 6, CarCopyId = 2, Class = "F", Description = "Auto luksusowe", PricePerDay = 500 },
-               new Pricing { Id = 7, CarCopyId = 10, Class = "S", Description = "Auto sportowe", PricePerDay = 500 },
-               new Pricing { Id = 8, CarCopyId = 8, Class = "H", Description = "Auto typu Kabriolet", PricePerDay = 250 },
-               new Pricing { Id = 9, CarCopyId = 9, Class = "J", Description = "Auto terenowe", PricePerDay = 400},
-               new Pricing { Id = 10, CarCopyId = 1, Class = "M", Description = "Auto typu VAN", PricePerDay = 300 }
-               );
+            //builder.Entity<Pricing>().HasData(
+            //   new Pricing { Id = 1, CarCopyId = 1, Class = "A", Description = "Mały samochód", PricePerDay = 50 },
+            //   new Pricing { Id = 2, CarCopyId = 4, Class = "B", Description = "Auto miejskie", PricePerDay = 100 },
+            //   new Pricing { Id = 3, CarCopyId = 5, Class = "C", Description = "Auto typu Kompakt", PricePerDay = 150 },
+            //   new Pricing { Id = 4, CarCopyId = 3, Class = "D", Description = "Auto klasy średniej", PricePerDay = 200 },
+            //   new Pricing { Id = 5, CarCopyId = 7, Class = "E", Description = "Auto klasy wyższej", PricePerDay = 350 },
+            //   new Pricing { Id = 6, CarCopyId = 2, Class = "F", Description = "Auto luksusowe", PricePerDay = 500 },
+            //   new Pricing { Id = 7, CarCopyId = 10, Class = "S", Description = "Auto sportowe", PricePerDay = 500 },
+            //   new Pricing { Id = 8, CarCopyId = 8, Class = "H", Description = "Auto typu Kabriolet", PricePerDay = 250 },
+            //   new Pricing { Id = 9, CarCopyId = 9, Class = "J", Description = "Auto terenowe", PricePerDay = 400},
+            //   new Pricing { Id = 10, CarCopyId = 1, Class = "M", Description = "Auto typu VAN", PricePerDay = 300 }
+            //   );
             builder.Entity<Rent>().HasData(
                new Rent { Id = 1, UserID = "6bb1647e-c2f3-4def-a875-32644e0b2b9f", CarCopyId = 1, RentDate = data1, ReturnDate = data2 }
                /*new Rent { Id = 2, UserID = "6bb1647e-c2f3-4def-a875-32644e0b2b9f", CarCopyId = 2, RentDate = data1, ReturnDate = data2 },

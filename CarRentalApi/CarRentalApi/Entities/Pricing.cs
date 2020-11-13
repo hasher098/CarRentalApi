@@ -23,6 +23,5 @@ using System.Text.Json.Serialization;
         [Required]
         public int PricePerDay { get; set; }
 
-        [ForeignKey("CarCopy")]
-        public int CarCopyId { get; set; }
+       
 }
