@@ -8,10 +8,12 @@ using System.Text.Json.Serialization;
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int Id { get; set; }
+
         [ForeignKey("CarCopy")]
         public int CarCopyId { get; set; }
     [JsonIgnore]
     public virtual CarCopy CarCopy { get; set; }
+
         [Required]
         [MaxLength(20)]
         public string Class { get; set; }
@@ -21,5 +23,6 @@ using System.Text.Json.Serialization;
         [Required]
         public int PricePerDay { get; set; }
 
-        
+        [ForeignKey("CarCopy")]
+        public int CarCopyId { get; set; }
 }
