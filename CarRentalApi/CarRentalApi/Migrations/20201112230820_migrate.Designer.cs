@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalApi.Migrations
 {
     [DbContext(typeof(CarRentDbContext))]
-    [Migration("20201112172921_seedy")]
-    partial class seedy
+    [Migration("20201112230820_migrate")]
+    partial class migrate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -510,8 +510,8 @@ namespace CarRentalApi.Migrations
 
                     b.Property<string>("RegistrationNumber")
                         .IsRequired()
-                        .HasColumnType("nvarchar(8)")
-                        .HasMaxLength(8);
+                        .HasColumnType("nvarchar(10)")
+                        .HasMaxLength(10);
 
                     b.HasKey("Id");
 
@@ -526,7 +526,70 @@ namespace CarRentalApi.Migrations
                             Id = 1,
                             CarId = 1,
                             IsRented = true,
-                            RegistrationNumber = "ERA 2137"
+                            RegistrationNumber = "ERA 2137P"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CarId = 2,
+                            IsRented = true,
+                            RegistrationNumber = "SC 12345"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CarId = 3,
+                            IsRented = false,
+                            RegistrationNumber = "SCZ 1523A"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CarId = 4,
+                            IsRented = true,
+                            RegistrationNumber = "SKL S8421"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CarId = 5,
+                            IsRented = true,
+                            RegistrationNumber = "SLU 67123"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CarId = 6,
+                            IsRented = false,
+                            RegistrationNumber = "EPJ AS128"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CarId = 7,
+                            IsRented = false,
+                            RegistrationNumber = "EL R2321A"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CarId = 8,
+                            IsRented = true,
+                            RegistrationNumber = "SK 9632A"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CarId = 9,
+                            IsRented = false,
+                            RegistrationNumber = "SB 123123"
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CarId = 10,
+                            IsRented = false,
+                            RegistrationNumber = "WI 48235"
                         });
                 });
 
@@ -834,9 +897,81 @@ namespace CarRentalApi.Migrations
                         {
                             Id = 1,
                             CarCopyId = 1,
+                            Class = "A",
+                            Description = "Mały samochód",
+                            PricePerDay = 50
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CarCopyId = 4,
                             Class = "B",
-                            Description = "Allalalalalalalalalalalala",
+                            Description = "Auto miejskie",
+                            PricePerDay = 100
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CarCopyId = 5,
+                            Class = "C",
+                            Description = "Auto typu Kompakt",
+                            PricePerDay = 150
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CarCopyId = 3,
+                            Class = "D",
+                            Description = "Auto klasy średniej",
+                            PricePerDay = 200
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CarCopyId = 7,
+                            Class = "E",
+                            Description = "Auto klasy wyższej",
+                            PricePerDay = 350
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CarCopyId = 2,
+                            Class = "F",
+                            Description = "Auto luksusowe",
                             PricePerDay = 500
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CarCopyId = 10,
+                            Class = "S",
+                            Description = "Auto sportowe",
+                            PricePerDay = 500
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CarCopyId = 8,
+                            Class = "H",
+                            Description = "Auto typu Kabriolet",
+                            PricePerDay = 250
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CarCopyId = 9,
+                            Class = "J",
+                            Description = "Auto terenowe",
+                            PricePerDay = 400
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CarCopyId = 1,
+                            Class = "M",
+                            Description = "Auto typu VAN",
+                            PricePerDay = 300
                         });
                 });
 
@@ -874,6 +1009,38 @@ namespace CarRentalApi.Migrations
                         {
                             Id = 1,
                             CarCopyId = 1,
+                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserID = "6bb1647e-c2f3-4def-a875-32644e0b2b9f"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CarCopyId = 2,
+                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserID = "6bb1647e-c2f3-4def-a875-32644e0b2b9f"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CarCopyId = 3,
+                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserID = "6bb1647e-c2f3-4def-a875-32644e0b2b9f"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CarCopyId = 4,
+                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserID = "6bb1647e-c2f3-4def-a875-32644e0b2b9f"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CarCopyId = 5,
                             RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserID = "6bb1647e-c2f3-4def-a875-32644e0b2b9f"
