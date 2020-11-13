@@ -5,7 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
     [Table("Cars")]
     public class Car
     {
-        [Key]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]   
         public int Id { get; set; }
         [Required]
         [MaxLength(255)]
