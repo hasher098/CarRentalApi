@@ -13,8 +13,6 @@ using System.Text.Json.Serialization;
         [MaxLength(10)]
         public string RegistrationNumber { get; set; }
         //numer rejestracyjny nie tylko zawiera liczby, dlatego int raczej siê tu nie przyda
-        [MaxLength(255)]
-        public string image { get; set; }
         [ForeignKey("Car")]
         public int CarId { get; set; }
     [JsonIgnore]
