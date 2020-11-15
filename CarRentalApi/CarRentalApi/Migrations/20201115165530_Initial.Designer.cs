@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalApi.Migrations
 {
     [DbContext(typeof(CarRentDbContext))]
-    [Migration("20201113111526_Initial")]
+    [Migration("20201115165530_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -54,6 +54,41 @@ namespace CarRentalApi.Migrations
                             BlacklistedUserId = "b889e9e9-0b5d-453f-9363-e93637b854aa",
                             IsBlacklisted = true,
                             Reason = "Ukradł drzwi"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            BlacklistedUserId = "10966c59-49f1-470a-a90c-94755d3870b3",
+                            IsBlacklisted = true,
+                            Reason = "Skasował auto"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            BlacklistedUserId = "711aa82e-b3af-482a-b2eb-8056e2b4e482",
+                            IsBlacklisted = true,
+                            Reason = "Zostawił auto w krzakach"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            BlacklistedUserId = "c514dedb-db0a-49e9-a5e6-44e875c0d6fd",
+                            IsBlacklisted = true,
+                            Reason = "Pobił prezesa firmy"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            BlacklistedUserId = "9952718a-e4af-40b1-8dce-fe07967d4534",
+                            IsBlacklisted = true,
+                            Reason = "Piłował auto do odciny i zatarł silnik"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            BlacklistedUserId = "304f6dbe-c471-45ad-a540-f4992be6f746",
+                            IsBlacklisted = true,
+                            Reason = "Potrącił starą kobiete na pasach i nie poniósł żadnych konsekwencji prawnych"
                         });
                 });
 
@@ -513,6 +548,10 @@ namespace CarRentalApi.Migrations
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
+                    b.Property<string>("image")
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
+
                     b.HasKey("Id");
 
                     b.HasIndex("CarId")
@@ -590,6 +629,111 @@ namespace CarRentalApi.Migrations
                             CarId = 10,
                             IsRented = false,
                             RegistrationNumber = "WI 48235"
+                        },
+                        new
+                        {
+                            Id = 11,
+                            CarId = 11,
+                            IsRented = true,
+                            RegistrationNumber = "EWI 22135"
+                        },
+                        new
+                        {
+                            Id = 12,
+                            CarId = 12,
+                            IsRented = true,
+                            RegistrationNumber = "SC AP442"
+                        },
+                        new
+                        {
+                            Id = 13,
+                            CarId = 13,
+                            IsRented = true,
+                            RegistrationNumber = "SCZ 52123"
+                        },
+                        new
+                        {
+                            Id = 14,
+                            CarId = 14,
+                            IsRented = true,
+                            RegistrationNumber = "GDA 32145"
+                        },
+                        new
+                        {
+                            Id = 15,
+                            CarId = 15,
+                            IsRented = true,
+                            RegistrationNumber = "SW 12346"
+                        },
+                        new
+                        {
+                            Id = 16,
+                            CarId = 16,
+                            IsRented = false,
+                            RegistrationNumber = "SZ 325SA"
+                        },
+                        new
+                        {
+                            Id = 17,
+                            CarId = 17,
+                            IsRented = false,
+                            RegistrationNumber = "EPI 22598"
+                        },
+                        new
+                        {
+                            Id = 18,
+                            CarId = 18,
+                            IsRented = true,
+                            RegistrationNumber = "EP PP223"
+                        },
+                        new
+                        {
+                            Id = 19,
+                            CarId = 19,
+                            IsRented = false,
+                            RegistrationNumber = "SR 42345"
+                        },
+                        new
+                        {
+                            Id = 20,
+                            CarId = 20,
+                            IsRented = true,
+                            RegistrationNumber = "WU 23456"
+                        },
+                        new
+                        {
+                            Id = 21,
+                            CarId = 21,
+                            IsRented = true,
+                            RegistrationNumber = "WZ PQW21"
+                        },
+                        new
+                        {
+                            Id = 22,
+                            CarId = 22,
+                            IsRented = false,
+                            RegistrationNumber = "KR 42931"
+                        },
+                        new
+                        {
+                            Id = 23,
+                            CarId = 23,
+                            IsRented = true,
+                            RegistrationNumber = "KRA 29341"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            CarId = 24,
+                            IsRented = false,
+                            RegistrationNumber = "DW 33257"
+                        },
+                        new
+                        {
+                            Id = 25,
+                            CarId = 25,
+                            IsRented = true,
+                            RegistrationNumber = "DWR 35812"
                         });
                 });
 
@@ -728,6 +872,125 @@ namespace CarRentalApi.Migrations
                             SecurityStamp = "C6SFYJKYII3YIC3UENBIFAIUQTSLSEXZ",
                             TwoFactorEnabled = false,
                             UserName = "Nowak"
+                        },
+                        new
+                        {
+                            Id = "10966c59-49f1-470a-a90c-94755d3870b3",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "a870f5e2-c084-4929-bbf5-6596af966e39",
+                            Email = "Lewandowski123@gmail.com",
+                            EmailConfirmed = true,
+                            IsActive = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "LEWANDOWSKI123@GMAIL.COM",
+                            NormalizedUserName = "LEWANDOWSKI",
+                            PasswordHash = "AQAAAAEAACcQAAAAEE8ySKAxHp1dS9Er4pzs8FrqWwrdhZxsEKAs5rW3DQXRMgJVn5y5g3N8/e/4EJuK+w==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "AOLABNGPJHBQDI2K5K6VX2OYDOLZABWZ",
+                            TwoFactorEnabled = false,
+                            UserName = "Lewandowski"
+                        },
+                        new
+                        {
+                            Id = "c89548b7-838f-4b90-94ac-763198501ce9",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "18b4ca59-cb79-459c-9578-8d65a5090d6c",
+                            Email = "OwcaWK@gmail.com",
+                            EmailConfirmed = true,
+                            IsActive = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "OWCAWK@GMAIL.COM",
+                            NormalizedUserName = "OWCAWK",
+                            PasswordHash = "AQAAAAEAACcQAAAAEAglmTAktrhxGf8FTo4ChX6re3EMp4Hi5jMl946pGhDMhZ0BFem75BKME7CrgYpJww==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "LVC765MPWOBA3V2SZXSYWLPEVTTXDRJQ",
+                            TwoFactorEnabled = false,
+                            UserName = "OwcaWK"
+                        },
+                        new
+                        {
+                            Id = "9952718a-e4af-40b1-8dce-fe07967d4534",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "08680348-2b35-47f9-a90e-430ac9e91db7",
+                            Email = "EndrjuDuda@gmail.com",
+                            EmailConfirmed = true,
+                            IsActive = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ENDRJUDUDA@GMAIL.com",
+                            NormalizedUserName = "ENDRJUDUDA",
+                            PasswordHash = "AQAAAAEAACcQAAAAEB8p9tWazRY8rhOEu/USJAstdhfMDpQf+82fi51KkrGYfUCeFU0qIqoPtv7E/AhjMg==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "WTWJMTDKPF3HA6OUK472DQAKAJ54XTRS",
+                            TwoFactorEnabled = false,
+                            UserName = "EndrjuDuda"
+                        },
+                        new
+                        {
+                            Id = "c514dedb-db0a-49e9-a5e6-44e875c0d6fd",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "51b33cd0-0ab7-4d8e-893d-8da6feb7096d",
+                            Email = "Ziobro123@gmail.com",
+                            EmailConfirmed = true,
+                            IsActive = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "ZIOBRO123@GMAIL.COM",
+                            NormalizedUserName = "ZBIGNIEWZIOBRO",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPQ0yzuj4mcljU0lmBZHFHZun6FuoN2oR6YF6dKaDPY/xWES3NSYBRMb1gozEQuFyQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "XJX42PJ6RHFIPJXJI25FTEH4HBEYLGSX",
+                            TwoFactorEnabled = false,
+                            UserName = "ZbigniewZiobro"
+                        },
+                        new
+                        {
+                            Id = "711aa82e-b3af-482a-b2eb-8056e2b4e482",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "c76128d8-d3a9-4b45-929f-b4375b133ffc",
+                            Email = "Stonoga@gmail.com",
+                            EmailConfirmed = true,
+                            IsActive = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "STONOGA@GMAIL.COM",
+                            NormalizedUserName = "ZBYSZEKSTONOGA",
+                            PasswordHash = "AQAAAAEAACcQAAAAEPmAxB56NFlCeenVjKtgCyLEQ9T7hEBb9OyhtOdWT1H9Ma48df361TfTHqYLxSGfqQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "K6C2VKRDVSTZGZAOZ2SGLFV2W73L57M2",
+                            TwoFactorEnabled = false,
+                            UserName = "ZbyszekStonoga"
+                        },
+                        new
+                        {
+                            Id = "304f6dbe-c471-45ad-a540-f4992be6f746",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "4373af8a-d161-4d96-851a-8d8506071b35",
+                            Email = "Janowicz@gmail.com",
+                            EmailConfirmed = true,
+                            IsActive = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "JANOWICZ@GMAIL.COM",
+                            NormalizedUserName = "JERZYJANOWICZ",
+                            PasswordHash = "AQAAAAEAACcQAAAAEKvFcCpDXeifSMEOZvbCUujCmLcw237R1v0P67LGE1MgFhB/zMQ3cG2UeBdt+BmvXQ==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "TMP3G6SC4PUNHPLDMKNIQ45NIDA6CY2G",
+                            TwoFactorEnabled = false,
+                            UserName = "JerzyJanowicz"
+                        },
+                        new
+                        {
+                            Id = "4b9d5218-9049-487e-b5b7-74b7b6527cf1",
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "6056ca99-1b1a-4da3-8296-e7bfd454fbce",
+                            Email = "Hajto@wp.pl",
+                            EmailConfirmed = true,
+                            IsActive = false,
+                            LockoutEnabled = true,
+                            NormalizedEmail = "HAJTO@WP.PL",
+                            NormalizedUserName = "TOMASZHAJTO",
+                            PasswordHash = "AQAAAAEAACcQAAAAEMhlYs1Bv230/gikTAepq5ACdvZGExUFFsg7mCr5n4djDgCHgnfFlmwdCfyjGJOnng==",
+                            PhoneNumberConfirmed = false,
+                            SecurityStamp = "6R6COOBSQJ6BUB7MODICTNADCJ7V2D4Z",
+                            TwoFactorEnabled = false,
+                            UserName = "TomaszHajto"
                         });
                 });
 
@@ -891,6 +1154,88 @@ namespace CarRentalApi.Migrations
                         .IsUnique();
 
                     b.ToTable("Pricing");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            CarCopyId = 1,
+                            Class = "A",
+                            Description = "Mały samochód",
+                            PricePerDay = 50
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CarCopyId = 2,
+                            Class = "B",
+                            Description = "Auto miejskie",
+                            PricePerDay = 100
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CarCopyId = 3,
+                            Class = "C",
+                            Description = "Auto typu Kompakt",
+                            PricePerDay = 150
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CarCopyId = 4,
+                            Class = "D",
+                            Description = "Auto klasy średniej",
+                            PricePerDay = 200
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CarCopyId = 5,
+                            Class = "E",
+                            Description = "Auto klasy wyższej",
+                            PricePerDay = 350
+                        },
+                        new
+                        {
+                            Id = 6,
+                            CarCopyId = 6,
+                            Class = "F",
+                            Description = "Auto luksusowe",
+                            PricePerDay = 500
+                        },
+                        new
+                        {
+                            Id = 7,
+                            CarCopyId = 7,
+                            Class = "S",
+                            Description = "Auto sportowe",
+                            PricePerDay = 500
+                        },
+                        new
+                        {
+                            Id = 8,
+                            CarCopyId = 8,
+                            Class = "H",
+                            Description = "Auto typu Kabriolet",
+                            PricePerDay = 250
+                        },
+                        new
+                        {
+                            Id = 9,
+                            CarCopyId = 9,
+                            Class = "J",
+                            Description = "Auto terenowe",
+                            PricePerDay = 400
+                        },
+                        new
+                        {
+                            Id = 10,
+                            CarCopyId = 10,
+                            Class = "M",
+                            Description = "Auto typu VAN",
+                            PricePerDay = 300
+                        });
                 });
 
             modelBuilder.Entity("Rent", b =>
@@ -930,6 +1275,38 @@ namespace CarRentalApi.Migrations
                             RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserID = "6bb1647e-c2f3-4def-a875-32644e0b2b9f"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            CarCopyId = 2,
+                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserID = "10966c59-49f1-470a-a90c-94755d3870b3"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            CarCopyId = 3,
+                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserID = "c89548b7-838f-4b90-94ac-763198501ce9"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            CarCopyId = 4,
+                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserID = "b889e9e9-0b5d-453f-9363-e93637b854aa"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            CarCopyId = 5,
+                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserID = "304f6dbe-c471-45ad-a540-f4992be6f746"
                         });
                 });
 
