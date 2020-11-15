@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarRentalApi.Migrations
 {
-    public partial class migrate2 : Migration
+    public partial class migrate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -68,7 +68,8 @@ namespace CarRentalApi.Migrations
                     Gearbox = table.Column<string>(maxLength: 2, nullable: false),
                     TrunkCapacity = table.Column<string>(maxLength: 10, nullable: false),
                     RoofRack = table.Column<bool>(nullable: false),
-                    BodyType = table.Column<string>(maxLength: 20, nullable: false)
+                    BodyType = table.Column<string>(maxLength: 20, nullable: false),
+                    image = table.Column<string>(maxLength: 255, nullable: true)
                 },
                 constraints: table =>
                 {
@@ -209,7 +210,6 @@ namespace CarRentalApi.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     RegistrationNumber = table.Column<string>(maxLength: 10, nullable: false),
-                    image = table.Column<string>(maxLength: 255, nullable: true),
                     CarId = table.Column<int>(nullable: false),
                     IsRented = table.Column<bool>(nullable: false)
                 },
@@ -293,34 +293,34 @@ namespace CarRentalApi.Migrations
 
             migrationBuilder.InsertData(
                 table: "Cars",
-                columns: new[] { "Id", "BodyType", "Brand", "Class", "Color", "EngineCapacity", "Gearbox", "Model", "RoofRack", "Seats", "TrunkCapacity", "Year" },
+                columns: new[] { "Id", "BodyType", "Brand", "Class", "Color", "EngineCapacity", "Gearbox", "Model", "RoofRack", "Seats", "TrunkCapacity", "Year", "image" },
                 values: new object[,]
                 {
-                    { 19, "Coupe", "Audi", "S", "Niebieski", "5.2", "AT", "R8", false, 5, "---", 2018 },
-                    { 25, "SUV", "Audi", "J", "Czarny", "3.0 TDI", "M", "Q7", true, 5, "1930L", 2017 },
-                    { 24, "Minivan", "Ford", "M", "Czarny", "2.0 Ecoblue", "AT", "Galaxy", false, 5, "2000L", 2017 },
-                    { 23, "Van", "Seat", "M", "Srebrny", "2.0 TDI", "M", "Alhambra", false, 5, "2000L", 2018 },
-                    { 22, "Van", "Volkswagen", "M", "Czarny", "2.0 TDI", "AT", "Sharan", false, 7, "2000L", 2016 },
-                    { 21, "Cabriolet", "BMW", "H", "Czarny", "2.5", "M", "Z4", false, 5, "280L", 2016 },
-                    { 20, "Cabriolet", "Audi", "H", "Biały", "2.0 TFSI", "AT", "TT", false, 5, "600L", 2015 },
-                    { 18, "Coupe", "Lamborghini", "S", "Żółty", "6.5 V12", "AT", "Aventador", false, 5, "1450L", 2016 },
-                    { 16, "Hatchback", "BMW", "C", "Czarny", "2.0 D", "M", "Seria 1", false, 5, "1280L", 2013 },
-                    { 2, "Hatchback", "Toyota", "B", "Srebrny", "1.0", "M", "Yaris", false, 5, "768L", 2015 },
-                    { 3, "Hatchback", "Opel", "B", "Niebieski", "1.6 T", "A", "Corsa", false, 5, "1100L", 2010 },
-                    { 4, "Sedan", "Volkswagen", "D", "Czarny", "2.0", "M", "Passat", false, 5, "1150L", 2016 },
-                    { 5, "Sedan", "Opel", "D", "Czarny", "2.0", "M", "Insignia", false, 5, "1470L", 2016 },
-                    { 6, "Hatchback", "Nissan", "A", "Czerwony", "1.0", "M", "Micra", false, 5, "800L", 2015 },
-                    { 7, "Hatchback", "Nissan", "A", "Czerwony", "1.0", "M", "Micra", false, 5, "800L", 2015 },
-                    { 17, "Hatchback", "Audi", "C", "Czarny", "2.0 TDI", "AT", "A3", false, 5, "1250L", 2014 },
-                    { 8, "Hatchback", "Volkswagen", "B", "Niebieski", "2.0 TSI", "AT", "Golf", false, 5, "800L", 2017 },
-                    { 10, "Kombi", "Mazda", "D", "Czerwony", "2.0 Skyaktiv", "AT", "6", true, 5, "1400L", 2015 },
-                    { 11, "Sedan", "Ford", "D", "Czarny", "2.0 TDCi", "M", "Mondeo", false, 5, "1450L", 2016 },
-                    { 12, "Sedan", "Audi", "F", "Czarny", "4.2 TDI", "AT", "A8", false, 5, "1700L", 2016 },
-                    { 13, "Kombi", "Audi", "F", "Czarny", "3.0 TDI", "AT", "A6", true, 5, "1570L", 2014 },
-                    { 14, "Sedan", "Audi", "S", "Czarny", "5.0 V10 TFSI", "AT", "RS6", false, 5, "1500L", 2010 },
-                    { 15, "Hatchback", "Fiat", "A", "Biały", "1.0", "M", "Panda", false, 5, "1000L", 2017 },
-                    { 9, "Kombi", "Volkswagen", "D", "Czarny", "2.0 TSI", "M", "Passat", true, 5, "1400L", 2013 },
-                    { 1, "Hatchback", "Kia", "B", "Czarny", "1.4", "M", "Rio", false, 5, "400L", 2012 }
+                    { 19, "Coupe", "Audi", "S", "Niebieski", "5.2", "AT", "R8", false, 5, "---", 2018, "https://www.auto-motor-i-sport.pl/media/lib/2555/2019-audi-r8.jpg" },
+                    { 25, "SUV", "Audi", "J", "Czerwony", "3.0 TDI", "M", "Q7", true, 5, "1930L", 2017, "https://i.wpimg.pl/1641x0/m.autokult.pl/audi-q7-2020-12-db837ab88fc7ecce,0,0,0,0.jpg" },
+                    { 24, "Minivan", "Ford", "M", "Granatowy", "2.0 Ecoblue", "AT", "Galaxy", false, 5, "2000L", 2017, "https://mojepokrowce.pl/userdata/public/gfx/847b505b0cacd7c8a3540c729178eaa9.jpg" },
+                    { 23, "Van", "Seat", "M", "Czerwony", "2.0 TDI", "M", "Alhambra", false, 5, "2000L", 2018, "https://www.autocentrum.pl/ac-file/gallery-photo/5dd3e3e5583a0f08331e2683.jpg" },
+                    { 22, "Van", "Volkswagen", "M", "Czarny", "2.0 TDI", "AT", "Sharan", false, 7, "2000L", 2016, "https://a.allegroimg.com/s512/11f6a1/16b75bc14ce790cd1da60cd90de2/VW-SHARAN-2-0-TDI-140KM_BOGATY_WLASCICIEL-BOGATY" },
+                    { 21, "Cabriolet", "BMW", "H", "Biały", "2.5", "M", "Z4", false, 5, "280L", 2016, "https://media.istockphoto.com/photos/white-bmw-z4-sports-car-picture-id458934741" },
+                    { 20, "Cabriolet", "Audi", "H", "Biały", "2.0 TFSI", "AT", "TT", false, 5, "600L", 2015, "https://image.ceneostatic.pl/data/products/73512595/i-audi-tt-s-line-tfsi-2010-2-0-200-km-194-000km.jpg" },
+                    { 18, "Coupe", "Lamborghini", "S", "Żółty", "6.5 V12", "AT", "Aventador", false, 5, "1450L", 2016, "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/2015_Lamborghini_Aventador_LP700-4_Pirelli_Edition_6.5_Front.jpg/1200px-2015_Lamborghini_Aventador_LP700-4_Pirelli_Edition_6.5_Front.jpg" },
+                    { 16, "Hatchback", "BMW", "C", "Granatowy", "2.0 D", "M", "Seria 1", false, 5, "1280L", 2013, "https://www.wyborkierowcow.pl/wp-content/uploads/2017/08/BMW-serii-1-sylwetka-1.jpg" },
+                    { 2, "Hatchback", "Toyota", "B", "Czerwony", "1.0", "M", "Yaris", false, 5, "768L", 2015, "https://ocdn.eu/pulscms-transforms/1/JiNktkuTURBXy8wZDczN2QxNC03MTU3LTRiMWYtYjA4ZS02YjA2Y2M2ODMyMTUuanBlZ5GVAs0EsM0CpMLD" },
+                    { 3, "Hatchback", "Opel", "B", "Zielony", "1.6 T", "A", "Corsa", false, 5, "1100L", 2016, "https://www.autobaza.pl/blog/wp-content/uploads/2019/06/corsa-740x431@2x.jpg" },
+                    { 4, "Kombi", "Volkswagen", "D", "Szary", "2.0", "M", "Passat", false, 5, "1150L", 2016, "https://i.wpimg.pl/1200x0/m.autokult.pl/vw-passat-rline-2019-5-e3cfb69cb.jpg" },
+                    { 5, "Sedan", "Opel", "D", "Niebieski", "2.0", "M", "Insignia", false, 5, "1470L", 2016, "https://dixi-car.pl/foto/galeria/insignia-b-fl/nowy-opel-insignia-grand-sport-fl.jpg" },
+                    { 6, "Hatchback", "Nissan", "A", "Pomarańczowy", "1.0", "M", "Micra", false, 5, "800L", 2015, "https://www-europe.nissan-cdn.net/content/dam/Nissan/nissan_europe/Configurator/Micra-March/k14a/grade/16TDIeulhd_B02E_MICRA_HELIOSConfigurator_002.jpg.ximg.l_12_m.smart.jpg" },
+                    { 7, "Hatchback", "Nissan", "A", "Czerwony", "1.0", "M", "Micra", false, 5, "800L", 2015, "https://cdntdreditorials.azureedge.net/cache/7/e/6/b/6/3/7e6b63e11ab1d8dabff7dc0178b2653486e31f96.jpg" },
+                    { 17, "Sedan", "Audi", "C", "Czarny", "2.0 TDI", "AT", "A3", false, 5, "1250L", 2014, "https://ireland.apollo.olxcdn.com/v1/files/eyJmbiI6InI2a2RyamFocTJodi1PVE9NT1RPUEwiLCJ3IjpbeyJmbiI6IndnNGducXA2eTFmLU9UT01PVE9QTCIsInMiOiIxNiIsInAiOiIxMCwtMTAiLCJhIjoiMCJ9XX0.TMLNc1Ljd6NGiAk5PU5wHeMbqFMTLJfj8xn0md7vgwk/image;s=1080x720" },
+                    { 8, "Hatchback", "Volkswagen", "B", "Limonkowy", "2.0 TSI", "AT", "Golf", false, 5, "800L", 2017, "https://www.autocentrum.pl/ac-file/gallery-photo/5df60c2b57502acb2539841e/volkswagen-golf.jpg" },
+                    { 10, "Sedan", "Mazda", "D", "Czerwony", "2.0 Skyaktiv", "AT", "6", true, 5, "1400L", 2015, "https://wokolmotoryzacji.pl/wp-content/uploads/2020/04/2023-mazda-6-rendering-1024x576.jpg" },
+                    { 11, "Sedan", "Ford", "D", "Czarny", "2.0 TDCi", "M", "Mondeo", false, 5, "1450L", 2016, "https://img.tipcars.com/fotky_velke/18082919_1/1572854594/E/ford-mondeo-2-0-tdci-titanium.jpg" },
+                    { 12, "Sedan", "Audi", "F", "Czarny", "4.2 TDI", "AT", "A8", false, 5, "1700L", 2016, "https://i.wpimg.pl/730x0/m.autokult.pl/2021-audi-a8-l-security--ec2f982.jpg" },
+                    { 13, "Sedan", "Audi", "F", "Niebieski", "3.0 TDI", "AT", "A6", true, 5, "1570L", 2017, "https://i.wpimg.pl/985x0/m.autokult.pl/audi-a6-ae1f38db7ee5e6b7d4322d1d.jpg" },
+                    { 14, "Kombi", "Audi", "S", "Zielony", "5.0 V10 TFSI", "AT", "RS6", false, 5, "1500L", 2019, "https://wokolmotoryzacji.pl/wp-content/uploads/2020/05/Wheelsandmore-Audi-RS6-Avant-1-1024x724.jpg" },
+                    { 15, "Hatchback", "Fiat", "A", "Biały", "1.0", "M", "Panda", false, 5, "1000L", 2017, "https://img.chceauto.pl/arts/3904/fiat-panda-waze-31419_v1.jpg" },
+                    { 9, "Kombi", "Volkswagen", "D", "Czarny", "2.0 TSI", "M", "Passat", true, 5, "1400L", 2013, "https://image.ceneostatic.pl/data/products/66665781/i-volkswagen-passat-b8-2017-190km-kombi-czarny.jpg" },
+                    { 1, "Hatchback", "Kia", "B", "Biały", "1.4", "M", "Rio", false, 5, "400L", 2012, "https://www.newsauto.pl/wp-content/uploads/2018/03/kia-gene-rio1.jpg" }
                 });
 
             migrationBuilder.InsertData(
@@ -338,34 +338,34 @@ namespace CarRentalApi.Migrations
 
             migrationBuilder.InsertData(
                 table: "CarCopy",
-                columns: new[] { "Id", "CarId", "IsRented", "RegistrationNumber", "image" },
+                columns: new[] { "Id", "CarId", "IsRented", "RegistrationNumber" },
                 values: new object[,]
                 {
-                    { 25, 25, true, "DWR 35812", null },
-                    { 24, 24, false, "DW 33257", null },
-                    { 23, 23, true, "KRA 29341", null },
-                    { 22, 22, false, "KR 42931", null },
-                    { 21, 21, true, "WZ PQW21", null },
-                    { 20, 20, true, "WU 23456", null },
-                    { 19, 19, false, "SR 42345", null },
-                    { 18, 18, true, "EP PP223", null },
-                    { 17, 17, false, "EPI 22598", null },
-                    { 16, 16, false, "SZ 325SA", null },
-                    { 14, 14, true, "GDA 32145", null },
-                    { 13, 13, true, "SCZ 52123", null },
-                    { 12, 12, true, "SC AP442", null },
-                    { 11, 11, true, "EWI 22135", null },
-                    { 10, 10, false, "WI 48235", null },
-                    { 9, 9, false, "SB 123123", null },
-                    { 8, 8, true, "SK 9632A", null },
-                    { 7, 7, false, "EL R2321A", null },
-                    { 6, 6, false, "EPJ AS128", null },
-                    { 5, 5, true, "SLU 67123", null },
-                    { 4, 4, true, "SKL S8421", null },
-                    { 3, 3, false, "SCZ 1523A", null },
-                    { 2, 2, true, "SC 12345", null },
-                    { 15, 15, true, "SW 12346", null },
-                    { 1, 1, true, "ERA 2137P", null }
+                    { 25, 25, true, "DWR 35812" },
+                    { 24, 24, false, "DW 33257" },
+                    { 23, 23, true, "KRA 29341" },
+                    { 22, 22, false, "KR 42931" },
+                    { 21, 21, false, "WZ PQW21" },
+                    { 20, 20, false, "WU 23456" },
+                    { 19, 19, false, "SR 42345" },
+                    { 18, 18, true, "EP PP223" },
+                    { 17, 17, false, "EPI 22598" },
+                    { 16, 16, false, "SZ 325SA" },
+                    { 14, 14, false, "GDA 32145" },
+                    { 13, 13, true, "SCZ 52123" },
+                    { 12, 12, false, "SC AP442" },
+                    { 11, 11, false, "EWI 22135" },
+                    { 10, 10, false, "WI 48235" },
+                    { 9, 9, false, "SB 123123" },
+                    { 8, 8, false, "SK 9632A" },
+                    { 7, 7, false, "EL R2321A" },
+                    { 6, 6, false, "EPJ AS128" },
+                    { 5, 5, false, "SLU 67123" },
+                    { 4, 4, false, "SKL S8421" },
+                    { 3, 3, false, "SCZ 1523A" },
+                    { 2, 2, true, "SC 12345" },
+                    { 15, 15, false, "SW 12346" },
+                    { 1, 1, false, "ERA 2137P" }
                 });
 
             migrationBuilder.InsertData(
@@ -390,11 +390,11 @@ namespace CarRentalApi.Migrations
                 columns: new[] { "Id", "CarCopyId", "RentDate", "ReturnDate", "UserID" },
                 values: new object[,]
                 {
-                    { 1, 1, new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "6bb1647e-c2f3-4def-a875-32644e0b2b9f" },
-                    { 2, 2, new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "10966c59-49f1-470a-a90c-94755d3870b3" },
-                    { 3, 3, new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "c89548b7-838f-4b90-94ac-763198501ce9" },
-                    { 4, 4, new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "b889e9e9-0b5d-453f-9363-e93637b854aa" },
-                    { 5, 5, new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified), "304f6dbe-c471-45ad-a540-f4992be6f746" }
+                    { 1, 1, new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified), "6bb1647e-c2f3-4def-a875-32644e0b2b9f" },
+                    { 2, 2, new DateTime(2020, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), "10966c59-49f1-470a-a90c-94755d3870b3" },
+                    { 3, 3, new DateTime(2020, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 7, 27, 0, 0, 0, 0, DateTimeKind.Unspecified), "c89548b7-838f-4b90-94ac-763198501ce9" },
+                    { 4, 4, new DateTime(2020, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 3, 17, 0, 0, 0, 0, DateTimeKind.Unspecified), "b889e9e9-0b5d-453f-9363-e93637b854aa" },
+                    { 5, 5, new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified), new DateTime(2020, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified), "304f6dbe-c471-45ad-a540-f4992be6f746" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -38,6 +38,8 @@ using System.Text.Json.Serialization;
         [Required]
         [MaxLength(20)]
         public string BodyType { get; set; }
+        [MaxLength(255)]
+        public string image { get; set; }
 
     [JsonIgnore]
     public virtual CarCopy CarCopy { get; set; }
