@@ -127,41 +127,41 @@ namespace CarRentalApi.Controllers
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo,
-                    User = user.UserName
+                    User = user.UserName,
+                    Id=user.Id
                 });
             }
             return Unauthorized();
             
         }
         [HttpPost, Route("UserEdit")]
-         public async Task<IActionResult> UserEdit(string id, string LastName,string FirstName, string pesel,
-            string Adress,string IdcardNumber)
+         public async Task<IActionResult> UserEdit([FromBody] EditModel model)
         {
-            var user = await userManager.FindByIdAsync(id);
+            var user = await userManager.FindByIdAsync(model.id);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
             }
 
-            if (user.LastName != LastName)
+            if (user.LastName != model.lastName)
             {
-                user.LastName = LastName;
+                user.LastName = model.lastName;
             }
-            if (user.FirstName != FirstName)
+            if (user.FirstName != model.firstName)
             {
-                user.FirstName = FirstName;
+                user.FirstName = model.firstName;
             }
-            if (user.Address != Adress)
+            if (user.Address != model.Adress)
             {
-                user.Address = Adress;
+                user.Address = model.Adress;
             }
-            if (user.Pesel != pesel)
+            if (user.Pesel != model.pesel)
             {
-                user.Pesel = pesel;
+                user.Pesel = model.pesel;
             }
-            if(user.IDcardNumber != IdcardNumber)
+            if(user.IDcardNumber != model.IdcardNumber)
             {
-                user.IDcardNumber = IdcardNumber;
+                user.IDcardNumber = model.IdcardNumber;
             }
             if(user.IsActive == false)
             {
