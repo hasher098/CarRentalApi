@@ -128,7 +128,8 @@ namespace CarRentalApi.Controllers
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo,
                     User = user.UserName,
-                    Id=user.Id
+                    Id=user.Id,
+                    Role = userRoles,
                 });
             }
             return Unauthorized();
