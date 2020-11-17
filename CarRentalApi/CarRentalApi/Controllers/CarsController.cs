@@ -44,7 +44,7 @@ namespace CarRentalApi
         public async Task<ActionResult<IEnumerable<Car>>> GetAvailableCars()
         {
             var cars = from t in _context.Cars.Include(c => c.CarCopy) select t;
-            cars = cars.Where(s => s.CarCopy.IsRented == true);
+            cars = cars.Where(s => s.CarCopy.IsRented == false);
 
             return await cars.ToListAsync();
         }
