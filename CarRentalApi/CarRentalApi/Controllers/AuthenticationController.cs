@@ -79,7 +79,6 @@ namespace CarRentalApi.Controllers
                 };
                 msg.AddTo(new EmailAddress(user.Email, "test"));
                 await mailClient.SendEmailAsync(msg);
-                var confirm = await userManager.ConfirmEmailAsync(user, token);
                 return Ok(new Authentication.Response { Status = "Success", Message = "User Created Successfully, confirmation required before you can log in." });
             }
         }
