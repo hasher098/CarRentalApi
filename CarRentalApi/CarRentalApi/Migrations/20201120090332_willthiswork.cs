@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace CarRentalApi.Migrations
 {
-    public partial class migrate : Migration
+    public partial class willthiswork : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -61,10 +61,10 @@ namespace CarRentalApi.Migrations
                     Class = table.Column<string>(maxLength: 255, nullable: false),
                     Brand = table.Column<string>(maxLength: 255, nullable: false),
                     Model = table.Column<string>(maxLength: 255, nullable: false),
-                    Year = table.Column<int>(maxLength: 4, nullable: false),
+                    Year = table.Column<int>(nullable: false),
                     Color = table.Column<string>(maxLength: 255, nullable: true),
                     EngineCapacity = table.Column<string>(nullable: false),
-                    Seats = table.Column<int>(maxLength: 1, nullable: false),
+                    Seats = table.Column<int>(nullable: false),
                     Gearbox = table.Column<string>(maxLength: 2, nullable: false),
                     TrunkCapacity = table.Column<string>(maxLength: 10, nullable: false),
                     RoofRack = table.Column<bool>(nullable: false),
@@ -446,8 +446,7 @@ namespace CarRentalApi.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_CarCopy_CarId",
                 table: "CarCopy",
-                column: "CarId",
-                unique: true);
+                column: "CarId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Pricing_CarCopyId",

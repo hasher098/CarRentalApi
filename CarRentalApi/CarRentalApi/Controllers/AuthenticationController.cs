@@ -17,7 +17,9 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Data;
-
+using Microsoft.AspNetCore.Authorization;
+using SendGrid.Helpers.Mail;
+using SendGrid;
 
 namespace CarRentalApi.Controllers
 {
@@ -42,7 +44,7 @@ namespace CarRentalApi.Controllers
         {
             var userExist = await userManager.FindByNameAsync(model.UserName);
             if (userExist != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User need Name" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = "User need Name" });
             ApplicationUser user = new ApplicationUser()
             {
                 Email = model.Email,
@@ -52,27 +54,63 @@ namespace CarRentalApi.Controllers
             var result = await userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error",  Message = "User need Password"});
+                return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = "User need Password" });
             }
-            if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
-                await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-            if (!await roleManager.RoleExistsAsync(UserRoles.User))
-                await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
-            if (await roleManager.RoleExistsAsync(UserRoles.Admin))
+            else
             {
-                await userManager.AddToRoleAsync(user, UserRoles.User);
+                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+                if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+                if (await roleManager.RoleExistsAsync(UserRoles.Admin))
+                {
+                    await userManager.AddToRoleAsync(user, UserRoles.User);
+                }
+                string token = await userManager.GenerateEmailConfirmationTokenAsync(user);
+                var url = Url.Action("ConfirmEmail", "AuthenticationController",
+                    new { userId = user.Id, token = token }, Request.Scheme);
+                var mailClient = new SendGridClient("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");
+                var msg = new SendGridMessage()
+                {
+                    From = new EmailAddress("carrental101czs@gmail.com", "CarRent"),
+                    Subject = "Potwierdź swój adres e-mail",
+                    PlainTextContent = $"Kliknij w poniższy link, żeby potwierdzić swój e-mail." +
+                    $"\n {user.Id} \n {token}"
+                };
+                msg.AddTo(new EmailAddress(user.Email, "test"));
+                await mailClient.SendEmailAsync(msg);
+                return Ok(new Authentication.Response { Status = "Success", Message = "User Created Successfully, confirmation required before you can log in." });
             }
-
-                return Ok(new Response { Status = "Success", Message = "User Created Successfully" });
-
         }
+
+        [HttpGet, Route("ConfirmEmail")]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        {
+            if (userId == null || token == null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = "UserId or token is null" });
+            }
+            var user = await userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = $"User ID {userId} is invalid" });
+            }
+            var result = await userManager.ConfirmEmailAsync(user, token);
+            if (result.Succeeded)
+            {
+                return Ok(new Authentication.Response { Status = "Success", Message = "Email confirmed!" });
+            }
+            return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = $"Email cannot be confirmed" });
+        }
+
         [HttpPost]
         [Route("RegisterAdmin")]
         public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)
         {
             var userExist = await userManager.FindByNameAsync(model.UserName);
             if (userExist != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User need Name" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = "User need Name" });
             ApplicationUser user = new ApplicationUser()
             {
                 Email = model.Email,
@@ -82,7 +120,7 @@ namespace CarRentalApi.Controllers
             var result = await userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User need Password" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = "User need Password" });
             }
             if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
                 await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
@@ -93,7 +131,7 @@ namespace CarRentalApi.Controllers
                 await userManager.AddToRoleAsync(user, UserRoles.Admin);
             }
 
-            return Ok(new Response { Status = "Success", Message = "User Created Successfully" });
+            return Ok(new Authentication.Response { Status = "Success", Message = "User Created Successfully" });
 
         }
         [HttpPost]
@@ -175,6 +213,5 @@ namespace CarRentalApi.Controllers
 
 
         }
-
     }
 }
