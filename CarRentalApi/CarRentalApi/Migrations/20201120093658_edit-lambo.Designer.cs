@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalApi.Migrations
 {
     [DbContext(typeof(CarRentDbContext))]
-    [Migration("20201115165530_Initial")]
-    partial class Initial
+    [Migration("20201120093658_edit-lambo")]
+    partial class editlambo
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,8 +136,7 @@ namespace CarRentalApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int>("Seats")
-                        .HasColumnType("int")
-                        .HasMaxLength(1);
+                        .HasColumnType("int");
 
                     b.Property<string>("TrunkCapacity")
                         .IsRequired()
@@ -145,8 +144,11 @@ namespace CarRentalApi.Migrations
                         .HasMaxLength(10);
 
                     b.Property<int>("Year")
-                        .HasColumnType("int")
-                        .HasMaxLength(4);
+                        .HasColumnType("int");
+
+                    b.Property<string>("image")
+                        .HasColumnType("nvarchar(255)")
+                        .HasMaxLength(255);
 
                     b.HasKey("Id");
 
@@ -159,14 +161,15 @@ namespace CarRentalApi.Migrations
                             BodyType = "Hatchback",
                             Brand = "Kia",
                             Class = "B",
-                            Color = "Czarny",
+                            Color = "Biały",
                             EngineCapacity = "1.4",
                             Gearbox = "M",
                             Model = "Rio",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "400L",
-                            Year = 2012
+                            Year = 2012,
+                            image = "https://www.newsauto.pl/wp-content/uploads/2018/03/kia-gene-rio1.jpg"
                         },
                         new
                         {
@@ -174,14 +177,15 @@ namespace CarRentalApi.Migrations
                             BodyType = "Hatchback",
                             Brand = "Toyota",
                             Class = "B",
-                            Color = "Srebrny",
+                            Color = "Czerwony",
                             EngineCapacity = "1.0",
                             Gearbox = "M",
                             Model = "Yaris",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "768L",
-                            Year = 2015
+                            Year = 2015,
+                            image = "https://ocdn.eu/pulscms-transforms/1/JiNktkuTURBXy8wZDczN2QxNC03MTU3LTRiMWYtYjA4ZS02YjA2Y2M2ODMyMTUuanBlZ5GVAs0EsM0CpMLD"
                         },
                         new
                         {
@@ -189,29 +193,31 @@ namespace CarRentalApi.Migrations
                             BodyType = "Hatchback",
                             Brand = "Opel",
                             Class = "B",
-                            Color = "Niebieski",
+                            Color = "Zielony",
                             EngineCapacity = "1.6 T",
                             Gearbox = "A",
                             Model = "Corsa",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1100L",
-                            Year = 2010
+                            Year = 2016,
+                            image = "https://www.autobaza.pl/blog/wp-content/uploads/2019/06/corsa-740x431@2x.jpg"
                         },
                         new
                         {
                             Id = 4,
-                            BodyType = "Sedan",
+                            BodyType = "Kombi",
                             Brand = "Volkswagen",
                             Class = "D",
-                            Color = "Czarny",
+                            Color = "Szary",
                             EngineCapacity = "2.0",
                             Gearbox = "M",
                             Model = "Passat",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1150L",
-                            Year = 2016
+                            Year = 2016,
+                            image = "https://i.wpimg.pl/1200x0/m.autokult.pl/vw-passat-rline-2019-5-e3cfb69cb.jpg"
                         },
                         new
                         {
@@ -219,14 +225,15 @@ namespace CarRentalApi.Migrations
                             BodyType = "Sedan",
                             Brand = "Opel",
                             Class = "D",
-                            Color = "Czarny",
+                            Color = "Niebieski",
                             EngineCapacity = "2.0",
                             Gearbox = "M",
                             Model = "Insignia",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1470L",
-                            Year = 2016
+                            Year = 2016,
+                            image = "https://dixi-car.pl/foto/galeria/insignia-b-fl/nowy-opel-insignia-grand-sport-fl.jpg"
                         },
                         new
                         {
@@ -234,14 +241,15 @@ namespace CarRentalApi.Migrations
                             BodyType = "Hatchback",
                             Brand = "Nissan",
                             Class = "A",
-                            Color = "Czerwony",
+                            Color = "Pomarańczowy",
                             EngineCapacity = "1.0",
                             Gearbox = "M",
                             Model = "Micra",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "800L",
-                            Year = 2015
+                            Year = 2015,
+                            image = "https://www-europe.nissan-cdn.net/content/dam/Nissan/nissan_europe/Configurator/Micra-March/k14a/grade/16TDIeulhd_B02E_MICRA_HELIOSConfigurator_002.jpg.ximg.l_12_m.smart.jpg"
                         },
                         new
                         {
@@ -256,7 +264,8 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "800L",
-                            Year = 2015
+                            Year = 2015,
+                            image = "https://cdntdreditorials.azureedge.net/cache/7/e/6/b/6/3/7e6b63e11ab1d8dabff7dc0178b2653486e31f96.jpg"
                         },
                         new
                         {
@@ -264,14 +273,15 @@ namespace CarRentalApi.Migrations
                             BodyType = "Hatchback",
                             Brand = "Volkswagen",
                             Class = "B",
-                            Color = "Niebieski",
+                            Color = "Limonkowy",
                             EngineCapacity = "2.0 TSI",
                             Gearbox = "AT",
                             Model = "Golf",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "800L",
-                            Year = 2017
+                            Year = 2017,
+                            image = "https://www.autocentrum.pl/ac-file/gallery-photo/5df60c2b57502acb2539841e/volkswagen-golf.jpg"
                         },
                         new
                         {
@@ -286,12 +296,13 @@ namespace CarRentalApi.Migrations
                             RoofRack = true,
                             Seats = 5,
                             TrunkCapacity = "1400L",
-                            Year = 2013
+                            Year = 2013,
+                            image = "https://image.ceneostatic.pl/data/products/66665781/i-volkswagen-passat-b8-2017-190km-kombi-czarny.jpg"
                         },
                         new
                         {
                             Id = 10,
-                            BodyType = "Kombi",
+                            BodyType = "Sedan",
                             Brand = "Mazda",
                             Class = "D",
                             Color = "Czerwony",
@@ -301,7 +312,8 @@ namespace CarRentalApi.Migrations
                             RoofRack = true,
                             Seats = 5,
                             TrunkCapacity = "1400L",
-                            Year = 2015
+                            Year = 2015,
+                            image = "https://wokolmotoryzacji.pl/wp-content/uploads/2020/04/2023-mazda-6-rendering-1024x576.jpg"
                         },
                         new
                         {
@@ -316,7 +328,8 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1450L",
-                            Year = 2016
+                            Year = 2016,
+                            image = "https://img.tipcars.com/fotky_velke/18082919_1/1572854594/E/ford-mondeo-2-0-tdci-titanium.jpg"
                         },
                         new
                         {
@@ -331,37 +344,40 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1700L",
-                            Year = 2016
+                            Year = 2016,
+                            image = "https://i.wpimg.pl/730x0/m.autokult.pl/2021-audi-a8-l-security--ec2f982.jpg"
                         },
                         new
                         {
                             Id = 13,
-                            BodyType = "Kombi",
+                            BodyType = "Sedan",
                             Brand = "Audi",
                             Class = "F",
-                            Color = "Czarny",
+                            Color = "Niebieski",
                             EngineCapacity = "3.0 TDI",
                             Gearbox = "AT",
                             Model = "A6",
                             RoofRack = true,
                             Seats = 5,
                             TrunkCapacity = "1570L",
-                            Year = 2014
+                            Year = 2017,
+                            image = "https://i.wpimg.pl/985x0/m.autokult.pl/audi-a6-ae1f38db7ee5e6b7d4322d1d.jpg"
                         },
                         new
                         {
                             Id = 14,
-                            BodyType = "Sedan",
+                            BodyType = "Kombi",
                             Brand = "Audi",
                             Class = "S",
-                            Color = "Czarny",
+                            Color = "Zielony",
                             EngineCapacity = "5.0 V10 TFSI",
                             Gearbox = "AT",
                             Model = "RS6",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1500L",
-                            Year = 2010
+                            Year = 2019,
+                            image = "https://wokolmotoryzacji.pl/wp-content/uploads/2020/05/Wheelsandmore-Audi-RS6-Avant-1-1024x724.jpg"
                         },
                         new
                         {
@@ -376,7 +392,8 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1000L",
-                            Year = 2017
+                            Year = 2017,
+                            image = "https://img.chceauto.pl/arts/3904/fiat-panda-waze-31419_v1.jpg"
                         },
                         new
                         {
@@ -384,19 +401,20 @@ namespace CarRentalApi.Migrations
                             BodyType = "Hatchback",
                             Brand = "BMW",
                             Class = "C",
-                            Color = "Czarny",
+                            Color = "Granatowy",
                             EngineCapacity = "2.0 D",
                             Gearbox = "M",
                             Model = "Seria 1",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1280L",
-                            Year = 2013
+                            Year = 2013,
+                            image = "https://www.wyborkierowcow.pl/wp-content/uploads/2017/08/BMW-serii-1-sylwetka-1.jpg"
                         },
                         new
                         {
                             Id = 17,
-                            BodyType = "Hatchback",
+                            BodyType = "Sedan",
                             Brand = "Audi",
                             Class = "C",
                             Color = "Czarny",
@@ -406,7 +424,8 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1250L",
-                            Year = 2014
+                            Year = 2014,
+                            image = "https://ireland.apollo.olxcdn.com/v1/files/eyJmbiI6InI2a2RyamFocTJodi1PVE9NT1RPUEwiLCJ3IjpbeyJmbiI6IndnNGducXA2eTFmLU9UT01PVE9QTCIsInMiOiIxNiIsInAiOiIxMCwtMTAiLCJhIjoiMCJ9XX0.TMLNc1Ljd6NGiAk5PU5wHeMbqFMTLJfj8xn0md7vgwk/image;s=1080x720"
                         },
                         new
                         {
@@ -414,14 +433,15 @@ namespace CarRentalApi.Migrations
                             BodyType = "Coupe",
                             Brand = "Lamborghini",
                             Class = "S",
-                            Color = "Żółty",
+                            Color = "Czarny",
                             EngineCapacity = "6.5 V12",
                             Gearbox = "AT",
                             Model = "Aventador",
                             RoofRack = false,
-                            Seats = 5,
-                            TrunkCapacity = "1450L",
-                            Year = 2016
+                            Seats = 2,
+                            TrunkCapacity = "---",
+                            Year = 2016,
+                            image = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/2015_Lamborghini_Aventador_LP700-4_Pirelli_Edition_6.5_Front.jpg/1200px-2015_Lamborghini_Aventador_LP700-4_Pirelli_Edition_6.5_Front.jpg"
                         },
                         new
                         {
@@ -436,7 +456,8 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "---",
-                            Year = 2018
+                            Year = 2018,
+                            image = "https://www.auto-motor-i-sport.pl/media/lib/2555/2019-audi-r8.jpg"
                         },
                         new
                         {
@@ -451,7 +472,8 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "600L",
-                            Year = 2015
+                            Year = 2015,
+                            image = "https://image.ceneostatic.pl/data/products/73512595/i-audi-tt-s-line-tfsi-2010-2-0-200-km-194-000km.jpg"
                         },
                         new
                         {
@@ -459,14 +481,15 @@ namespace CarRentalApi.Migrations
                             BodyType = "Cabriolet",
                             Brand = "BMW",
                             Class = "H",
-                            Color = "Czarny",
+                            Color = "Biały",
                             EngineCapacity = "2.5",
                             Gearbox = "M",
                             Model = "Z4",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "280L",
-                            Year = 2016
+                            Year = 2016,
+                            image = "https://media.istockphoto.com/photos/white-bmw-z4-sports-car-picture-id458934741"
                         },
                         new
                         {
@@ -481,7 +504,8 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 7,
                             TrunkCapacity = "2000L",
-                            Year = 2016
+                            Year = 2016,
+                            image = "https://a.allegroimg.com/s512/11f6a1/16b75bc14ce790cd1da60cd90de2/VW-SHARAN-2-0-TDI-140KM_BOGATY_WLASCICIEL-BOGATY"
                         },
                         new
                         {
@@ -489,14 +513,15 @@ namespace CarRentalApi.Migrations
                             BodyType = "Van",
                             Brand = "Seat",
                             Class = "M",
-                            Color = "Srebrny",
+                            Color = "Czerwony",
                             EngineCapacity = "2.0 TDI",
                             Gearbox = "M",
                             Model = "Alhambra",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "2000L",
-                            Year = 2018
+                            Year = 2018,
+                            image = "https://www.autocentrum.pl/ac-file/gallery-photo/5dd3e3e5583a0f08331e2683.jpg"
                         },
                         new
                         {
@@ -504,14 +529,15 @@ namespace CarRentalApi.Migrations
                             BodyType = "Minivan",
                             Brand = "Ford",
                             Class = "M",
-                            Color = "Czarny",
+                            Color = "Granatowy",
                             EngineCapacity = "2.0 Ecoblue",
                             Gearbox = "AT",
                             Model = "Galaxy",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "2000L",
-                            Year = 2017
+                            Year = 2017,
+                            image = "https://mojepokrowce.pl/userdata/public/gfx/847b505b0cacd7c8a3540c729178eaa9.jpg"
                         },
                         new
                         {
@@ -519,14 +545,15 @@ namespace CarRentalApi.Migrations
                             BodyType = "SUV",
                             Brand = "Audi",
                             Class = "J",
-                            Color = "Czarny",
+                            Color = "Czerwony",
                             EngineCapacity = "3.0 TDI",
                             Gearbox = "M",
                             Model = "Q7",
                             RoofRack = true,
                             Seats = 5,
                             TrunkCapacity = "1930L",
-                            Year = 2017
+                            Year = 2017,
+                            image = "https://i.wpimg.pl/1641x0/m.autokult.pl/audi-q7-2020-12-db837ab88fc7ecce,0,0,0,0.jpg"
                         });
                 });
 
@@ -548,14 +575,9 @@ namespace CarRentalApi.Migrations
                         .HasColumnType("nvarchar(10)")
                         .HasMaxLength(10);
 
-                    b.Property<string>("image")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
-
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId")
-                        .IsUnique();
+                    b.HasIndex("CarId");
 
                     b.ToTable("CarCopy");
 
@@ -564,7 +586,7 @@ namespace CarRentalApi.Migrations
                         {
                             Id = 1,
                             CarId = 1,
-                            IsRented = true,
+                            IsRented = false,
                             RegistrationNumber = "ERA 2137P"
                         },
                         new
@@ -585,14 +607,14 @@ namespace CarRentalApi.Migrations
                         {
                             Id = 4,
                             CarId = 4,
-                            IsRented = true,
+                            IsRented = false,
                             RegistrationNumber = "SKL S8421"
                         },
                         new
                         {
                             Id = 5,
                             CarId = 5,
-                            IsRented = true,
+                            IsRented = false,
                             RegistrationNumber = "SLU 67123"
                         },
                         new
@@ -613,7 +635,7 @@ namespace CarRentalApi.Migrations
                         {
                             Id = 8,
                             CarId = 8,
-                            IsRented = true,
+                            IsRented = false,
                             RegistrationNumber = "SK 9632A"
                         },
                         new
@@ -634,14 +656,14 @@ namespace CarRentalApi.Migrations
                         {
                             Id = 11,
                             CarId = 11,
-                            IsRented = true,
+                            IsRented = false,
                             RegistrationNumber = "EWI 22135"
                         },
                         new
                         {
                             Id = 12,
                             CarId = 12,
-                            IsRented = true,
+                            IsRented = false,
                             RegistrationNumber = "SC AP442"
                         },
                         new
@@ -655,14 +677,14 @@ namespace CarRentalApi.Migrations
                         {
                             Id = 14,
                             CarId = 14,
-                            IsRented = true,
+                            IsRented = false,
                             RegistrationNumber = "GDA 32145"
                         },
                         new
                         {
                             Id = 15,
                             CarId = 15,
-                            IsRented = true,
+                            IsRented = false,
                             RegistrationNumber = "SW 12346"
                         },
                         new
@@ -697,14 +719,14 @@ namespace CarRentalApi.Migrations
                         {
                             Id = 20,
                             CarId = 20,
-                            IsRented = true,
+                            IsRented = false,
                             RegistrationNumber = "WU 23456"
                         },
                         new
                         {
                             Id = 21,
                             CarId = 21,
-                            IsRented = true,
+                            IsRented = false,
                             RegistrationNumber = "WZ PQW21"
                         },
                         new
@@ -1261,9 +1283,7 @@ namespace CarRentalApi.Migrations
 
                     b.HasIndex("CarCopyId");
 
-                    b.HasIndex("UserID")
-                        .IsUnique()
-                        .HasFilter("[UserID] IS NOT NULL");
+                    b.HasIndex("UserID");
 
                     b.ToTable("Rent");
 
@@ -1272,40 +1292,40 @@ namespace CarRentalApi.Migrations
                         {
                             Id = 1,
                             CarCopyId = 1,
-                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RentDate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserID = "6bb1647e-c2f3-4def-a875-32644e0b2b9f"
                         },
                         new
                         {
                             Id = 2,
                             CarCopyId = 2,
-                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RentDate = new DateTime(2020, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserID = "10966c59-49f1-470a-a90c-94755d3870b3"
                         },
                         new
                         {
                             Id = 3,
                             CarCopyId = 3,
-                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RentDate = new DateTime(2020, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 7, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserID = "c89548b7-838f-4b90-94ac-763198501ce9"
                         },
                         new
                         {
                             Id = 4,
                             CarCopyId = 4,
-                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RentDate = new DateTime(2020, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 3, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserID = "b889e9e9-0b5d-453f-9363-e93637b854aa"
                         },
                         new
                         {
                             Id = 5,
                             CarCopyId = 5,
-                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RentDate = new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserID = "304f6dbe-c471-45ad-a540-f4992be6f746"
                         });
                 });
@@ -1320,8 +1340,8 @@ namespace CarRentalApi.Migrations
             modelBuilder.Entity("CarCopy", b =>
                 {
                     b.HasOne("Car", "Car")
-                        .WithOne("CarCopy")
-                        .HasForeignKey("CarCopy", "CarId")
+                        .WithMany("CarCopies")
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1395,8 +1415,8 @@ namespace CarRentalApi.Migrations
                         .IsRequired();
 
                     b.HasOne("CarRentalApi.Authentication.ApplicationUser", "ApplicationUser")
-                        .WithOne("Rent")
-                        .HasForeignKey("Rent", "UserID");
+                        .WithMany("Rent")
+                        .HasForeignKey("UserID");
                 });
 #pragma warning restore 612, 618
         }

@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CarRentalApi.Migrations
 {
     [DbContext(typeof(CarRentDbContext))]
-    [Migration("20201115212206_migrate")]
-    partial class migrate
+    [Migration("20201120090332_willthiswork")]
+    partial class willthiswork
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -136,8 +136,7 @@ namespace CarRentalApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int>("Seats")
-                        .HasColumnType("int")
-                        .HasMaxLength(1);
+                        .HasColumnType("int");
 
                     b.Property<string>("TrunkCapacity")
                         .IsRequired()
@@ -145,8 +144,7 @@ namespace CarRentalApi.Migrations
                         .HasMaxLength(10);
 
                     b.Property<int>("Year")
-                        .HasColumnType("int")
-                        .HasMaxLength(4);
+                        .HasColumnType("int");
 
                     b.Property<string>("image")
                         .HasColumnType("nvarchar(255)")
@@ -579,8 +577,7 @@ namespace CarRentalApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId")
-                        .IsUnique();
+                    b.HasIndex("CarId");
 
                     b.ToTable("CarCopy");
 
@@ -1345,8 +1342,8 @@ namespace CarRentalApi.Migrations
             modelBuilder.Entity("CarCopy", b =>
                 {
                     b.HasOne("Car", "Car")
-                        .WithOne("CarCopy")
-                        .HasForeignKey("CarCopy", "CarId")
+                        .WithMany("CarCopies")
+                        .HasForeignKey("CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });

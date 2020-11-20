@@ -1,4 +1,5 @@
 using Microsoft.Net.Http.Headers;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
@@ -40,5 +41,5 @@ using System.Text.Json.Serialization;
         public string image { get; set; }
 
     [JsonIgnore]
-    public virtual CarCopy CarCopy { get; set; }
+    public virtual ICollection<CarCopy> CarCopies { get; set; }
     }
