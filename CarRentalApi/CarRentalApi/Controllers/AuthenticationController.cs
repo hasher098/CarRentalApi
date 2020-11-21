@@ -20,6 +20,7 @@ using System.Data;
 using Microsoft.AspNetCore.Authorization;
 using SendGrid.Helpers.Mail;
 using SendGrid;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace CarRentalApi.Controllers
 {
@@ -32,11 +33,15 @@ namespace CarRentalApi.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IConfiguration _configuration;
         private readonly RoleManager<IdentityRole> roleManager;
+ 
+
         public AuthenticationController(UserManager<ApplicationUser> userManager, IConfiguration configuration, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             _configuration = configuration;
             this.roleManager = roleManager;
+           
+
         }
         [HttpPost]
         [Route("Register")]
@@ -103,6 +108,111 @@ namespace CarRentalApi.Controllers
             }
             return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = $"Email cannot be confirmed" });
         }
+        [HttpGet, Route("ForgetPasswordAsync")]
+        [AllowAnonymous]
+        public async Task<UserManagerResponse> ForgetPasswordAsync(string email)
+        {
+            var user = await userManager.FindByEmailAsync(email);
+            if (user == null)
+                return new UserManagerResponse
+                {
+                    IsSuccess = false,
+                    Message = "No user associated with email",
+                };
+
+            var token = await userManager.GeneratePasswordResetTokenAsync(user);
+            
+         
+
+            var mailClient = new SendGridClient("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");
+            var msg = new SendGridMessage()
+            {
+                From = new EmailAddress("carrental101czs@gmail.com", "CarRent"),
+                Subject = "Reset hasla",
+                PlainTextContent = $"Kliknij w poniższy link, żeby potwierdzic haslo swój e-mail." +
+                    $"\n {user.Id} \n {token}"
+            };
+            msg.AddTo(new EmailAddress(user.Email, "test"));
+            await mailClient.SendEmailAsync(msg);
+            return new UserManagerResponse
+            {
+                IsSuccess = true,
+                Message = "Reset password URL has been sent to the email successfully!"
+            };
+        }
+        [HttpGet, Route("ResetPasswordAsync")]
+        [AllowAnonymous]
+        public async Task<UserManagerResponse> ResetPasswordAsync(ResetPasswordModel model)
+        {
+            var user = await userManager.FindByEmailAsync(model.Email);
+            if (user == null)
+                return new UserManagerResponse
+                {
+                    IsSuccess = false,
+                    Message = "No user associated with email",
+                };
+
+            if (model.NewPassword != model.ConfirmPassword)
+                return new UserManagerResponse
+                {
+                    IsSuccess = false,
+                    Message = "Password doesn't match its confirmation",
+                };
+
+            var decodedToken = WebEncoders.Base64UrlDecode(model.Token);
+            string normalToken = Encoding.UTF8.GetString(decodedToken);
+
+            var result = await userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
+
+            if (result.Succeeded)
+                return new UserManagerResponse
+                {
+                    Message = "Password has been reset successfully!",
+                    IsSuccess = true,
+                };
+
+            return new UserManagerResponse
+            {
+                Message = "Something went wrong",
+                IsSuccess = false,
+                Errors = result.Errors.Select(e => e.Description),
+            };
+        }
+        [HttpPost("ForgetPassword")]
+        public async Task<IActionResult> ForgetPassword(string email)
+        {
+            if (string.IsNullOrEmpty(email))
+                return NotFound();
+
+            var result = await ForgetPasswordAsync(email);
+
+            if (result.IsSuccess)
+            {
+                return Ok(result); // 200
+            }
+
+            return BadRequest(result); // 400
+        }
+
+     
+        [HttpPost("ResetPassword")]
+        public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                var result = await ResetPasswordAsync(model);
+
+                if (result.IsSuccess)
+                    return Ok(result);
+
+                return BadRequest(result);
+            }
+
+            return BadRequest("Some properties are not valid");
+        }
+
+
+
 
         [HttpPost]
         [Route("RegisterAdmin")]
