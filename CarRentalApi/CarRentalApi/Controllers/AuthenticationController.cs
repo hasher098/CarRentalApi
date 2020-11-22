@@ -72,23 +72,22 @@ namespace CarRentalApi.Controllers
                     await userManager.AddToRoleAsync(user, UserRoles.User);
                 }
                 string token = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                var url = Url.Action("ConfirmEmail", "AuthenticationController",
-                    new { userId = user.Id, token = token }, Request.Scheme);
+                var url = Url.RouteUrl("ConfirmEmail", new { userId = user.Id, token = token }, "https");
                 var mailClient = new SendGridClient("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");
                 var msg = new SendGridMessage()
                 {
                     From = new EmailAddress("carrental101czs@gmail.com", "CarRent"),
                     Subject = "Potwierdź swój adres e-mail",
-                    PlainTextContent = $"Kliknij w poniższy link, żeby potwierdzić swój e-mail." +
-                    $"\n {user.Id} \n {token}"
+                    HtmlContent = $"<h5>Kliknij poniżej, aby zatwierdzić swój e-mail</h5><br>" +
+                    $"<a href=\"{url}\">Potwierdź maila</a>"
                 };
-                msg.AddTo(new EmailAddress(user.Email, "test"));
+                msg.AddTo(new EmailAddress(user.Email));
                 await mailClient.SendEmailAsync(msg);
                 return Ok(new Authentication.Response { Status = "Success", Message = "User Created Successfully, confirmation required before you can log in." });
             }
         }
 
-        [HttpGet, Route("ConfirmEmail")]
+        [HttpGet(Name = "ConfirmEmail")]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
