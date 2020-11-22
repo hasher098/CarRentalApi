@@ -45,7 +45,7 @@ namespace CarRentalApi.Controllers
         }
         [HttpPost]
         [Route("Register")]
-        public async Task<IActionResult> Register ([FromBody] RegisterModel model)
+        public async Task<IActionResult> Register([FromBody] RegisterModel model)
         {
             var userExist = await userManager.FindByNameAsync(model.UserName);
             if (userExist != null)
@@ -72,7 +72,8 @@ namespace CarRentalApi.Controllers
                     await userManager.AddToRoleAsync(user, UserRoles.User);
                 }
                 string token = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                var url = Url.RouteUrl("ConfirmEmail", new { userId = user.Id, token = token }, "https");
+                var confirmationUrl = Url.Action("ConfirmEmail", "Authentication", new { userId = user.Id, token = token });
+                var url = $"https://localhost:44397" + confirmationUrl;
                 var mailClient = new SendGridClient("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");
                 var msg = new SendGridMessage()
                 {
@@ -86,8 +87,7 @@ namespace CarRentalApi.Controllers
                 return Ok(new Authentication.Response { Status = "Success", Message = "User Created Successfully, confirmation required before you can log in." });
             }
         }
-
-        [HttpGet(Name = "ConfirmEmail")]
+        [HttpGet, Route("ConfirmEmail")]
         [AllowAnonymous]
         public async Task<IActionResult> ConfirmEmail(string userId, string token)
         {
