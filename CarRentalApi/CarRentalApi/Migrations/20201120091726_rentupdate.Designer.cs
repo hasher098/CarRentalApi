@@ -4,14 +4,16 @@ using CarRentalApi.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace CarRentalApi.Migrations
 {
     [DbContext(typeof(CarRentDbContext))]
-    partial class CarRentDbContextModelSnapshot : ModelSnapshot
+    [Migration("20201120091726_rentupdate")]
+    partial class rentupdate
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -431,13 +433,13 @@ namespace CarRentalApi.Migrations
                             BodyType = "Coupe",
                             Brand = "Lamborghini",
                             Class = "S",
-                            Color = "Czarny",
+                            Color = "Żółty",
                             EngineCapacity = "6.5 V12",
                             Gearbox = "AT",
                             Model = "Aventador",
                             RoofRack = false,
-                            Seats = 2,
-                            TrunkCapacity = "---",
+                            Seats = 5,
+                            TrunkCapacity = "1450L",
                             Year = 2016,
                             image = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/2015_Lamborghini_Aventador_LP700-4_Pirelli_Edition_6.5_Front.jpg/1200px-2015_Lamborghini_Aventador_LP700-4_Pirelli_Edition_6.5_Front.jpg"
                         },
