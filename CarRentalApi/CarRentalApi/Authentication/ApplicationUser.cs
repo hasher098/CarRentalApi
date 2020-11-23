@@ -1,6 +1,5 @@
 ﻿using CarRentalApi.Entities;
 using Microsoft.AspNetCore.Identity;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Text.Json.Serialization;
 
@@ -25,8 +24,7 @@ namespace CarRentalApi.Authentication
         [JsonIgnore]
         public virtual BlackList BlackList { get; set; }
         [JsonIgnore]
-        public virtual IList<Rent> Rent { get; set; }
-
+        public virtual Rent Rent { get; set; }
 
     }
 }
