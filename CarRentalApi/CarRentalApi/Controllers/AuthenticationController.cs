@@ -120,15 +120,12 @@ namespace CarRentalApi.Controllers
                 };
 
             var token = await userManager.GeneratePasswordResetTokenAsync(user);
-            
-         
-
             var mailClient = new SendGridClient("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");
             var msg = new SendGridMessage()
             {
                 From = new EmailAddress("carrental101czs@gmail.com", "CarRent"),
                 Subject = "Reset hasla",
-                PlainTextContent = $"Kliknij w poniższy link, żeby potwierdzic haslo swój e-mail." +
+                PlainTextContent = $"Kliknij w poniższy link, żeby ustawić nowe hasło." +
                     $"\n {user.Id} \n {token}"
             };
             msg.AddTo(new EmailAddress(user.Email, "test"));
