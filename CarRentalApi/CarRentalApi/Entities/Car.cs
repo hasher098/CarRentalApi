@@ -1,5 +1,4 @@
 using Microsoft.Net.Http.Headers;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Text.Json.Serialization;
@@ -19,12 +18,14 @@ using System.Text.Json.Serialization;
         [Required]
         [MaxLength(255)]
         public string Model { get; set; }
+        [MaxLength(4)]
         public int Year { get; set; }
         [MaxLength(255)]
         public string Color { get; set; }
         [Required]
         public string EngineCapacity { get; set; }
         [Required]
+        [MaxLength(1)]
         public int Seats { get; set; }
         [Required]
         [MaxLength(2)]
@@ -37,9 +38,7 @@ using System.Text.Json.Serialization;
         [Required]
         [MaxLength(20)]
         public string BodyType { get; set; }
-        [MaxLength(255)]
-        public string image { get; set; }
 
     [JsonIgnore]
-    public virtual ICollection<CarCopy> CarCopies { get; set; }
+    public virtual CarCopy CarCopy { get; set; }
     }

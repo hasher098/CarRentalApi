@@ -52,41 +52,6 @@ namespace CarRentalApi.Migrations
                             BlacklistedUserId = "b889e9e9-0b5d-453f-9363-e93637b854aa",
                             IsBlacklisted = true,
                             Reason = "Ukradł drzwi"
-                        },
-                        new
-                        {
-                            Id = 2,
-                            BlacklistedUserId = "10966c59-49f1-470a-a90c-94755d3870b3",
-                            IsBlacklisted = true,
-                            Reason = "Skasował auto"
-                        },
-                        new
-                        {
-                            Id = 3,
-                            BlacklistedUserId = "711aa82e-b3af-482a-b2eb-8056e2b4e482",
-                            IsBlacklisted = true,
-                            Reason = "Zostawił auto w krzakach"
-                        },
-                        new
-                        {
-                            Id = 4,
-                            BlacklistedUserId = "c514dedb-db0a-49e9-a5e6-44e875c0d6fd",
-                            IsBlacklisted = true,
-                            Reason = "Pobił prezesa firmy"
-                        },
-                        new
-                        {
-                            Id = 5,
-                            BlacklistedUserId = "9952718a-e4af-40b1-8dce-fe07967d4534",
-                            IsBlacklisted = true,
-                            Reason = "Piłował auto do odciny i zatarł silnik"
-                        },
-                        new
-                        {
-                            Id = 6,
-                            BlacklistedUserId = "304f6dbe-c471-45ad-a540-f4992be6f746",
-                            IsBlacklisted = true,
-                            Reason = "Potrącił starą kobiete na pasach i nie poniósł żadnych konsekwencji prawnych"
                         });
                 });
 
@@ -134,7 +99,8 @@ namespace CarRentalApi.Migrations
                         .HasColumnType("bit");
 
                     b.Property<int>("Seats")
-                        .HasColumnType("int");
+                        .HasColumnType("int")
+                        .HasMaxLength(1);
 
                     b.Property<string>("TrunkCapacity")
                         .IsRequired()
@@ -142,11 +108,8 @@ namespace CarRentalApi.Migrations
                         .HasMaxLength(10);
 
                     b.Property<int>("Year")
-                        .HasColumnType("int");
-
-                    b.Property<string>("image")
-                        .HasColumnType("nvarchar(255)")
-                        .HasMaxLength(255);
+                        .HasColumnType("int")
+                        .HasMaxLength(4);
 
                     b.HasKey("Id");
 
@@ -159,15 +122,14 @@ namespace CarRentalApi.Migrations
                             BodyType = "Hatchback",
                             Brand = "Kia",
                             Class = "B",
-                            Color = "Biały",
+                            Color = "Czarny",
                             EngineCapacity = "1.4",
                             Gearbox = "M",
                             Model = "Rio",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "400L",
-                            Year = 2012,
-                            image = "https://www.newsauto.pl/wp-content/uploads/2018/03/kia-gene-rio1.jpg"
+                            Year = 2012
                         },
                         new
                         {
@@ -175,15 +137,14 @@ namespace CarRentalApi.Migrations
                             BodyType = "Hatchback",
                             Brand = "Toyota",
                             Class = "B",
-                            Color = "Czerwony",
+                            Color = "Srebrny",
                             EngineCapacity = "1.0",
                             Gearbox = "M",
                             Model = "Yaris",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "768L",
-                            Year = 2015,
-                            image = "https://ocdn.eu/pulscms-transforms/1/JiNktkuTURBXy8wZDczN2QxNC03MTU3LTRiMWYtYjA4ZS02YjA2Y2M2ODMyMTUuanBlZ5GVAs0EsM0CpMLD"
+                            Year = 2015
                         },
                         new
                         {
@@ -191,31 +152,29 @@ namespace CarRentalApi.Migrations
                             BodyType = "Hatchback",
                             Brand = "Opel",
                             Class = "B",
-                            Color = "Zielony",
+                            Color = "Niebieski",
                             EngineCapacity = "1.6 T",
                             Gearbox = "A",
                             Model = "Corsa",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1100L",
-                            Year = 2016,
-                            image = "https://www.autobaza.pl/blog/wp-content/uploads/2019/06/corsa-740x431@2x.jpg"
+                            Year = 2010
                         },
                         new
                         {
                             Id = 4,
-                            BodyType = "Kombi",
+                            BodyType = "Sedan",
                             Brand = "Volkswagen",
                             Class = "D",
-                            Color = "Szary",
+                            Color = "Czarny",
                             EngineCapacity = "2.0",
                             Gearbox = "M",
                             Model = "Passat",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1150L",
-                            Year = 2016,
-                            image = "https://i.wpimg.pl/1200x0/m.autokult.pl/vw-passat-rline-2019-5-e3cfb69cb.jpg"
+                            Year = 2016
                         },
                         new
                         {
@@ -223,15 +182,14 @@ namespace CarRentalApi.Migrations
                             BodyType = "Sedan",
                             Brand = "Opel",
                             Class = "D",
-                            Color = "Niebieski",
+                            Color = "Czarny",
                             EngineCapacity = "2.0",
                             Gearbox = "M",
                             Model = "Insignia",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1470L",
-                            Year = 2016,
-                            image = "https://dixi-car.pl/foto/galeria/insignia-b-fl/nowy-opel-insignia-grand-sport-fl.jpg"
+                            Year = 2016
                         },
                         new
                         {
@@ -239,15 +197,14 @@ namespace CarRentalApi.Migrations
                             BodyType = "Hatchback",
                             Brand = "Nissan",
                             Class = "A",
-                            Color = "Pomarańczowy",
+                            Color = "Czerwony",
                             EngineCapacity = "1.0",
                             Gearbox = "M",
                             Model = "Micra",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "800L",
-                            Year = 2015,
-                            image = "https://www-europe.nissan-cdn.net/content/dam/Nissan/nissan_europe/Configurator/Micra-March/k14a/grade/16TDIeulhd_B02E_MICRA_HELIOSConfigurator_002.jpg.ximg.l_12_m.smart.jpg"
+                            Year = 2015
                         },
                         new
                         {
@@ -262,8 +219,7 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "800L",
-                            Year = 2015,
-                            image = "https://cdntdreditorials.azureedge.net/cache/7/e/6/b/6/3/7e6b63e11ab1d8dabff7dc0178b2653486e31f96.jpg"
+                            Year = 2015
                         },
                         new
                         {
@@ -271,15 +227,14 @@ namespace CarRentalApi.Migrations
                             BodyType = "Hatchback",
                             Brand = "Volkswagen",
                             Class = "B",
-                            Color = "Limonkowy",
+                            Color = "Niebieski",
                             EngineCapacity = "2.0 TSI",
                             Gearbox = "AT",
                             Model = "Golf",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "800L",
-                            Year = 2017,
-                            image = "https://www.autocentrum.pl/ac-file/gallery-photo/5df60c2b57502acb2539841e/volkswagen-golf.jpg"
+                            Year = 2017
                         },
                         new
                         {
@@ -294,13 +249,12 @@ namespace CarRentalApi.Migrations
                             RoofRack = true,
                             Seats = 5,
                             TrunkCapacity = "1400L",
-                            Year = 2013,
-                            image = "https://image.ceneostatic.pl/data/products/66665781/i-volkswagen-passat-b8-2017-190km-kombi-czarny.jpg"
+                            Year = 2013
                         },
                         new
                         {
                             Id = 10,
-                            BodyType = "Sedan",
+                            BodyType = "Kombi",
                             Brand = "Mazda",
                             Class = "D",
                             Color = "Czerwony",
@@ -310,8 +264,7 @@ namespace CarRentalApi.Migrations
                             RoofRack = true,
                             Seats = 5,
                             TrunkCapacity = "1400L",
-                            Year = 2015,
-                            image = "https://wokolmotoryzacji.pl/wp-content/uploads/2020/04/2023-mazda-6-rendering-1024x576.jpg"
+                            Year = 2015
                         },
                         new
                         {
@@ -326,8 +279,7 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1450L",
-                            Year = 2016,
-                            image = "https://img.tipcars.com/fotky_velke/18082919_1/1572854594/E/ford-mondeo-2-0-tdci-titanium.jpg"
+                            Year = 2016
                         },
                         new
                         {
@@ -342,40 +294,37 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1700L",
-                            Year = 2016,
-                            image = "https://i.wpimg.pl/730x0/m.autokult.pl/2021-audi-a8-l-security--ec2f982.jpg"
+                            Year = 2016
                         },
                         new
                         {
                             Id = 13,
-                            BodyType = "Sedan",
+                            BodyType = "Kombi",
                             Brand = "Audi",
                             Class = "F",
-                            Color = "Niebieski",
+                            Color = "Czarny",
                             EngineCapacity = "3.0 TDI",
                             Gearbox = "AT",
                             Model = "A6",
                             RoofRack = true,
                             Seats = 5,
                             TrunkCapacity = "1570L",
-                            Year = 2017,
-                            image = "https://i.wpimg.pl/985x0/m.autokult.pl/audi-a6-ae1f38db7ee5e6b7d4322d1d.jpg"
+                            Year = 2014
                         },
                         new
                         {
                             Id = 14,
-                            BodyType = "Kombi",
+                            BodyType = "Sedan",
                             Brand = "Audi",
                             Class = "S",
-                            Color = "Zielony",
+                            Color = "Czarny",
                             EngineCapacity = "5.0 V10 TFSI",
                             Gearbox = "AT",
                             Model = "RS6",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1500L",
-                            Year = 2019,
-                            image = "https://wokolmotoryzacji.pl/wp-content/uploads/2020/05/Wheelsandmore-Audi-RS6-Avant-1-1024x724.jpg"
+                            Year = 2010
                         },
                         new
                         {
@@ -390,8 +339,7 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1000L",
-                            Year = 2017,
-                            image = "https://img.chceauto.pl/arts/3904/fiat-panda-waze-31419_v1.jpg"
+                            Year = 2017
                         },
                         new
                         {
@@ -399,20 +347,19 @@ namespace CarRentalApi.Migrations
                             BodyType = "Hatchback",
                             Brand = "BMW",
                             Class = "C",
-                            Color = "Granatowy",
+                            Color = "Czarny",
                             EngineCapacity = "2.0 D",
                             Gearbox = "M",
                             Model = "Seria 1",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1280L",
-                            Year = 2013,
-                            image = "https://www.wyborkierowcow.pl/wp-content/uploads/2017/08/BMW-serii-1-sylwetka-1.jpg"
+                            Year = 2013
                         },
                         new
                         {
                             Id = 17,
-                            BodyType = "Sedan",
+                            BodyType = "Hatchback",
                             Brand = "Audi",
                             Class = "C",
                             Color = "Czarny",
@@ -422,8 +369,7 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "1250L",
-                            Year = 2014,
-                            image = "https://ireland.apollo.olxcdn.com/v1/files/eyJmbiI6InI2a2RyamFocTJodi1PVE9NT1RPUEwiLCJ3IjpbeyJmbiI6IndnNGducXA2eTFmLU9UT01PVE9QTCIsInMiOiIxNiIsInAiOiIxMCwtMTAiLCJhIjoiMCJ9XX0.TMLNc1Ljd6NGiAk5PU5wHeMbqFMTLJfj8xn0md7vgwk/image;s=1080x720"
+                            Year = 2014
                         },
                         new
                         {
@@ -431,15 +377,14 @@ namespace CarRentalApi.Migrations
                             BodyType = "Coupe",
                             Brand = "Lamborghini",
                             Class = "S",
-                            Color = "Czarny",
+                            Color = "Żółty",
                             EngineCapacity = "6.5 V12",
                             Gearbox = "AT",
                             Model = "Aventador",
                             RoofRack = false,
-                            Seats = 2,
-                            TrunkCapacity = "---",
-                            Year = 2016,
-                            image = "https://upload.wikimedia.org/wikipedia/commons/thumb/8/83/2015_Lamborghini_Aventador_LP700-4_Pirelli_Edition_6.5_Front.jpg/1200px-2015_Lamborghini_Aventador_LP700-4_Pirelli_Edition_6.5_Front.jpg"
+                            Seats = 5,
+                            TrunkCapacity = "1450L",
+                            Year = 2016
                         },
                         new
                         {
@@ -454,8 +399,7 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "---",
-                            Year = 2018,
-                            image = "https://www.auto-motor-i-sport.pl/media/lib/2555/2019-audi-r8.jpg"
+                            Year = 2018
                         },
                         new
                         {
@@ -470,8 +414,7 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "600L",
-                            Year = 2015,
-                            image = "https://image.ceneostatic.pl/data/products/73512595/i-audi-tt-s-line-tfsi-2010-2-0-200-km-194-000km.jpg"
+                            Year = 2015
                         },
                         new
                         {
@@ -479,15 +422,14 @@ namespace CarRentalApi.Migrations
                             BodyType = "Cabriolet",
                             Brand = "BMW",
                             Class = "H",
-                            Color = "Biały",
+                            Color = "Czarny",
                             EngineCapacity = "2.5",
                             Gearbox = "M",
                             Model = "Z4",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "280L",
-                            Year = 2016,
-                            image = "https://media.istockphoto.com/photos/white-bmw-z4-sports-car-picture-id458934741"
+                            Year = 2016
                         },
                         new
                         {
@@ -502,8 +444,7 @@ namespace CarRentalApi.Migrations
                             RoofRack = false,
                             Seats = 7,
                             TrunkCapacity = "2000L",
-                            Year = 2016,
-                            image = "https://a.allegroimg.com/s512/11f6a1/16b75bc14ce790cd1da60cd90de2/VW-SHARAN-2-0-TDI-140KM_BOGATY_WLASCICIEL-BOGATY"
+                            Year = 2016
                         },
                         new
                         {
@@ -511,15 +452,14 @@ namespace CarRentalApi.Migrations
                             BodyType = "Van",
                             Brand = "Seat",
                             Class = "M",
-                            Color = "Czerwony",
+                            Color = "Srebrny",
                             EngineCapacity = "2.0 TDI",
                             Gearbox = "M",
                             Model = "Alhambra",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "2000L",
-                            Year = 2018,
-                            image = "https://www.autocentrum.pl/ac-file/gallery-photo/5dd3e3e5583a0f08331e2683.jpg"
+                            Year = 2018
                         },
                         new
                         {
@@ -527,15 +467,14 @@ namespace CarRentalApi.Migrations
                             BodyType = "Minivan",
                             Brand = "Ford",
                             Class = "M",
-                            Color = "Granatowy",
+                            Color = "Czarny",
                             EngineCapacity = "2.0 Ecoblue",
                             Gearbox = "AT",
                             Model = "Galaxy",
                             RoofRack = false,
                             Seats = 5,
                             TrunkCapacity = "2000L",
-                            Year = 2017,
-                            image = "https://mojepokrowce.pl/userdata/public/gfx/847b505b0cacd7c8a3540c729178eaa9.jpg"
+                            Year = 2017
                         },
                         new
                         {
@@ -543,15 +482,14 @@ namespace CarRentalApi.Migrations
                             BodyType = "SUV",
                             Brand = "Audi",
                             Class = "J",
-                            Color = "Czerwony",
+                            Color = "Czarny",
                             EngineCapacity = "3.0 TDI",
                             Gearbox = "M",
                             Model = "Q7",
                             RoofRack = true,
                             Seats = 5,
                             TrunkCapacity = "1930L",
-                            Year = 2017,
-                            image = "https://i.wpimg.pl/1641x0/m.autokult.pl/audi-q7-2020-12-db837ab88fc7ecce,0,0,0,0.jpg"
+                            Year = 2017
                         });
                 });
 
@@ -575,7 +513,8 @@ namespace CarRentalApi.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CarId");
+                    b.HasIndex("CarId")
+                        .IsUnique();
 
                     b.ToTable("CarCopy");
 
@@ -584,7 +523,7 @@ namespace CarRentalApi.Migrations
                         {
                             Id = 1,
                             CarId = 1,
-                            IsRented = false,
+                            IsRented = true,
                             RegistrationNumber = "ERA 2137P"
                         },
                         new
@@ -605,14 +544,14 @@ namespace CarRentalApi.Migrations
                         {
                             Id = 4,
                             CarId = 4,
-                            IsRented = false,
+                            IsRented = true,
                             RegistrationNumber = "SKL S8421"
                         },
                         new
                         {
                             Id = 5,
                             CarId = 5,
-                            IsRented = false,
+                            IsRented = true,
                             RegistrationNumber = "SLU 67123"
                         },
                         new
@@ -633,7 +572,7 @@ namespace CarRentalApi.Migrations
                         {
                             Id = 8,
                             CarId = 8,
-                            IsRented = false,
+                            IsRented = true,
                             RegistrationNumber = "SK 9632A"
                         },
                         new
@@ -649,111 +588,6 @@ namespace CarRentalApi.Migrations
                             CarId = 10,
                             IsRented = false,
                             RegistrationNumber = "WI 48235"
-                        },
-                        new
-                        {
-                            Id = 11,
-                            CarId = 11,
-                            IsRented = false,
-                            RegistrationNumber = "EWI 22135"
-                        },
-                        new
-                        {
-                            Id = 12,
-                            CarId = 12,
-                            IsRented = false,
-                            RegistrationNumber = "SC AP442"
-                        },
-                        new
-                        {
-                            Id = 13,
-                            CarId = 13,
-                            IsRented = true,
-                            RegistrationNumber = "SCZ 52123"
-                        },
-                        new
-                        {
-                            Id = 14,
-                            CarId = 14,
-                            IsRented = false,
-                            RegistrationNumber = "GDA 32145"
-                        },
-                        new
-                        {
-                            Id = 15,
-                            CarId = 15,
-                            IsRented = false,
-                            RegistrationNumber = "SW 12346"
-                        },
-                        new
-                        {
-                            Id = 16,
-                            CarId = 16,
-                            IsRented = false,
-                            RegistrationNumber = "SZ 325SA"
-                        },
-                        new
-                        {
-                            Id = 17,
-                            CarId = 17,
-                            IsRented = false,
-                            RegistrationNumber = "EPI 22598"
-                        },
-                        new
-                        {
-                            Id = 18,
-                            CarId = 18,
-                            IsRented = true,
-                            RegistrationNumber = "EP PP223"
-                        },
-                        new
-                        {
-                            Id = 19,
-                            CarId = 19,
-                            IsRented = false,
-                            RegistrationNumber = "SR 42345"
-                        },
-                        new
-                        {
-                            Id = 20,
-                            CarId = 20,
-                            IsRented = false,
-                            RegistrationNumber = "WU 23456"
-                        },
-                        new
-                        {
-                            Id = 21,
-                            CarId = 21,
-                            IsRented = false,
-                            RegistrationNumber = "WZ PQW21"
-                        },
-                        new
-                        {
-                            Id = 22,
-                            CarId = 22,
-                            IsRented = false,
-                            RegistrationNumber = "KR 42931"
-                        },
-                        new
-                        {
-                            Id = 23,
-                            CarId = 23,
-                            IsRented = true,
-                            RegistrationNumber = "KRA 29341"
-                        },
-                        new
-                        {
-                            Id = 24,
-                            CarId = 24,
-                            IsRented = false,
-                            RegistrationNumber = "DW 33257"
-                        },
-                        new
-                        {
-                            Id = 25,
-                            CarId = 25,
-                            IsRented = true,
-                            RegistrationNumber = "DWR 35812"
                         });
                 });
 
@@ -892,125 +726,6 @@ namespace CarRentalApi.Migrations
                             SecurityStamp = "C6SFYJKYII3YIC3UENBIFAIUQTSLSEXZ",
                             TwoFactorEnabled = false,
                             UserName = "Nowak"
-                        },
-                        new
-                        {
-                            Id = "10966c59-49f1-470a-a90c-94755d3870b3",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "a870f5e2-c084-4929-bbf5-6596af966e39",
-                            Email = "Lewandowski123@gmail.com",
-                            EmailConfirmed = true,
-                            IsActive = false,
-                            LockoutEnabled = true,
-                            NormalizedEmail = "LEWANDOWSKI123@GMAIL.COM",
-                            NormalizedUserName = "LEWANDOWSKI",
-                            PasswordHash = "AQAAAAEAACcQAAAAEE8ySKAxHp1dS9Er4pzs8FrqWwrdhZxsEKAs5rW3DQXRMgJVn5y5g3N8/e/4EJuK+w==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "AOLABNGPJHBQDI2K5K6VX2OYDOLZABWZ",
-                            TwoFactorEnabled = false,
-                            UserName = "Lewandowski"
-                        },
-                        new
-                        {
-                            Id = "c89548b7-838f-4b90-94ac-763198501ce9",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "18b4ca59-cb79-459c-9578-8d65a5090d6c",
-                            Email = "OwcaWK@gmail.com",
-                            EmailConfirmed = true,
-                            IsActive = false,
-                            LockoutEnabled = true,
-                            NormalizedEmail = "OWCAWK@GMAIL.COM",
-                            NormalizedUserName = "OWCAWK",
-                            PasswordHash = "AQAAAAEAACcQAAAAEAglmTAktrhxGf8FTo4ChX6re3EMp4Hi5jMl946pGhDMhZ0BFem75BKME7CrgYpJww==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "LVC765MPWOBA3V2SZXSYWLPEVTTXDRJQ",
-                            TwoFactorEnabled = false,
-                            UserName = "OwcaWK"
-                        },
-                        new
-                        {
-                            Id = "9952718a-e4af-40b1-8dce-fe07967d4534",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "08680348-2b35-47f9-a90e-430ac9e91db7",
-                            Email = "EndrjuDuda@gmail.com",
-                            EmailConfirmed = true,
-                            IsActive = false,
-                            LockoutEnabled = true,
-                            NormalizedEmail = "ENDRJUDUDA@GMAIL.com",
-                            NormalizedUserName = "ENDRJUDUDA",
-                            PasswordHash = "AQAAAAEAACcQAAAAEB8p9tWazRY8rhOEu/USJAstdhfMDpQf+82fi51KkrGYfUCeFU0qIqoPtv7E/AhjMg==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "WTWJMTDKPF3HA6OUK472DQAKAJ54XTRS",
-                            TwoFactorEnabled = false,
-                            UserName = "EndrjuDuda"
-                        },
-                        new
-                        {
-                            Id = "c514dedb-db0a-49e9-a5e6-44e875c0d6fd",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "51b33cd0-0ab7-4d8e-893d-8da6feb7096d",
-                            Email = "Ziobro123@gmail.com",
-                            EmailConfirmed = true,
-                            IsActive = false,
-                            LockoutEnabled = true,
-                            NormalizedEmail = "ZIOBRO123@GMAIL.COM",
-                            NormalizedUserName = "ZBIGNIEWZIOBRO",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPQ0yzuj4mcljU0lmBZHFHZun6FuoN2oR6YF6dKaDPY/xWES3NSYBRMb1gozEQuFyQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "XJX42PJ6RHFIPJXJI25FTEH4HBEYLGSX",
-                            TwoFactorEnabled = false,
-                            UserName = "ZbigniewZiobro"
-                        },
-                        new
-                        {
-                            Id = "711aa82e-b3af-482a-b2eb-8056e2b4e482",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "c76128d8-d3a9-4b45-929f-b4375b133ffc",
-                            Email = "Stonoga@gmail.com",
-                            EmailConfirmed = true,
-                            IsActive = false,
-                            LockoutEnabled = true,
-                            NormalizedEmail = "STONOGA@GMAIL.COM",
-                            NormalizedUserName = "ZBYSZEKSTONOGA",
-                            PasswordHash = "AQAAAAEAACcQAAAAEPmAxB56NFlCeenVjKtgCyLEQ9T7hEBb9OyhtOdWT1H9Ma48df361TfTHqYLxSGfqQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "K6C2VKRDVSTZGZAOZ2SGLFV2W73L57M2",
-                            TwoFactorEnabled = false,
-                            UserName = "ZbyszekStonoga"
-                        },
-                        new
-                        {
-                            Id = "304f6dbe-c471-45ad-a540-f4992be6f746",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "4373af8a-d161-4d96-851a-8d8506071b35",
-                            Email = "Janowicz@gmail.com",
-                            EmailConfirmed = true,
-                            IsActive = false,
-                            LockoutEnabled = true,
-                            NormalizedEmail = "JANOWICZ@GMAIL.COM",
-                            NormalizedUserName = "JERZYJANOWICZ",
-                            PasswordHash = "AQAAAAEAACcQAAAAEKvFcCpDXeifSMEOZvbCUujCmLcw237R1v0P67LGE1MgFhB/zMQ3cG2UeBdt+BmvXQ==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "TMP3G6SC4PUNHPLDMKNIQ45NIDA6CY2G",
-                            TwoFactorEnabled = false,
-                            UserName = "JerzyJanowicz"
-                        },
-                        new
-                        {
-                            Id = "4b9d5218-9049-487e-b5b7-74b7b6527cf1",
-                            AccessFailedCount = 0,
-                            ConcurrencyStamp = "6056ca99-1b1a-4da3-8296-e7bfd454fbce",
-                            Email = "Hajto@wp.pl",
-                            EmailConfirmed = true,
-                            IsActive = false,
-                            LockoutEnabled = true,
-                            NormalizedEmail = "HAJTO@WP.PL",
-                            NormalizedUserName = "TOMASZHAJTO",
-                            PasswordHash = "AQAAAAEAACcQAAAAEMhlYs1Bv230/gikTAepq5ACdvZGExUFFsg7mCr5n4djDgCHgnfFlmwdCfyjGJOnng==",
-                            PhoneNumberConfirmed = false,
-                            SecurityStamp = "6R6COOBSQJ6BUB7MODICTNADCJ7V2D4Z",
-                            TwoFactorEnabled = false,
-                            UserName = "TomaszHajto"
                         });
                 });
 
@@ -1187,7 +902,7 @@ namespace CarRentalApi.Migrations
                         new
                         {
                             Id = 2,
-                            CarCopyId = 2,
+                            CarCopyId = 4,
                             Class = "B",
                             Description = "Auto miejskie",
                             PricePerDay = 100
@@ -1195,7 +910,7 @@ namespace CarRentalApi.Migrations
                         new
                         {
                             Id = 3,
-                            CarCopyId = 3,
+                            CarCopyId = 5,
                             Class = "C",
                             Description = "Auto typu Kompakt",
                             PricePerDay = 150
@@ -1203,7 +918,7 @@ namespace CarRentalApi.Migrations
                         new
                         {
                             Id = 4,
-                            CarCopyId = 4,
+                            CarCopyId = 3,
                             Class = "D",
                             Description = "Auto klasy średniej",
                             PricePerDay = 200
@@ -1211,7 +926,7 @@ namespace CarRentalApi.Migrations
                         new
                         {
                             Id = 5,
-                            CarCopyId = 5,
+                            CarCopyId = 7,
                             Class = "E",
                             Description = "Auto klasy wyższej",
                             PricePerDay = 350
@@ -1219,7 +934,7 @@ namespace CarRentalApi.Migrations
                         new
                         {
                             Id = 6,
-                            CarCopyId = 6,
+                            CarCopyId = 2,
                             Class = "F",
                             Description = "Auto luksusowe",
                             PricePerDay = 500
@@ -1227,7 +942,7 @@ namespace CarRentalApi.Migrations
                         new
                         {
                             Id = 7,
-                            CarCopyId = 7,
+                            CarCopyId = 10,
                             Class = "S",
                             Description = "Auto sportowe",
                             PricePerDay = 500
@@ -1251,7 +966,7 @@ namespace CarRentalApi.Migrations
                         new
                         {
                             Id = 10,
-                            CarCopyId = 10,
+                            CarCopyId = 1,
                             Class = "M",
                             Description = "Auto typu VAN",
                             PricePerDay = 300
@@ -1281,7 +996,9 @@ namespace CarRentalApi.Migrations
 
                     b.HasIndex("CarCopyId");
 
-                    b.HasIndex("UserID");
+                    b.HasIndex("UserID")
+                        .IsUnique()
+                        .HasFilter("[UserID] IS NOT NULL");
 
                     b.ToTable("Rent");
 
@@ -1290,41 +1007,41 @@ namespace CarRentalApi.Migrations
                         {
                             Id = 1,
                             CarCopyId = 1,
-                            RentDate = new DateTime(2020, 1, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2020, 1, 5, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
                             UserID = "6bb1647e-c2f3-4def-a875-32644e0b2b9f"
                         },
                         new
                         {
                             Id = 2,
                             CarCopyId = 2,
-                            RentDate = new DateTime(2020, 5, 1, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2020, 5, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserID = "10966c59-49f1-470a-a90c-94755d3870b3"
+                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserID = "6bb1647e-c2f3-4def-a875-32644e0b2b9f"
                         },
                         new
                         {
                             Id = 3,
                             CarCopyId = 3,
-                            RentDate = new DateTime(2020, 7, 20, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2020, 7, 27, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserID = "c89548b7-838f-4b90-94ac-763198501ce9"
+                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserID = "6bb1647e-c2f3-4def-a875-32644e0b2b9f"
                         },
                         new
                         {
                             Id = 4,
                             CarCopyId = 4,
-                            RentDate = new DateTime(2020, 3, 15, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2020, 3, 17, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserID = "b889e9e9-0b5d-453f-9363-e93637b854aa"
+                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserID = "6bb1647e-c2f3-4def-a875-32644e0b2b9f"
                         },
                         new
                         {
                             Id = 5,
                             CarCopyId = 5,
-                            RentDate = new DateTime(2020, 10, 10, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            ReturnDate = new DateTime(2020, 10, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
-                            UserID = "304f6dbe-c471-45ad-a540-f4992be6f746"
+                            RentDate = new DateTime(2020, 11, 12, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            ReturnDate = new DateTime(2020, 11, 16, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            UserID = "6bb1647e-c2f3-4def-a875-32644e0b2b9f"
                         });
                 });
 
@@ -1338,8 +1055,8 @@ namespace CarRentalApi.Migrations
             modelBuilder.Entity("CarCopy", b =>
                 {
                     b.HasOne("Car", "Car")
-                        .WithMany("CarCopies")
-                        .HasForeignKey("CarId")
+                        .WithOne("CarCopy")
+                        .HasForeignKey("CarCopy", "CarId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
                 });
@@ -1413,8 +1130,8 @@ namespace CarRentalApi.Migrations
                         .IsRequired();
 
                     b.HasOne("CarRentalApi.Authentication.ApplicationUser", "ApplicationUser")
-                        .WithMany("Rent")
-                        .HasForeignKey("UserID");
+                        .WithOne("Rent")
+                        .HasForeignKey("Rent", "UserID");
                 });
 #pragma warning restore 612, 618
         }
