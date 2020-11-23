@@ -17,10 +17,7 @@ using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using System.IdentityModel.Tokens.Jwt;
 using System.Data;
-using Microsoft.AspNetCore.Authorization;
-using SendGrid.Helpers.Mail;
-using SendGrid;
-using Microsoft.AspNetCore.WebUtilities;
+
 
 namespace CarRentalApi.Controllers
 {
@@ -33,23 +30,19 @@ namespace CarRentalApi.Controllers
         private readonly UserManager<ApplicationUser> userManager;
         private readonly IConfiguration _configuration;
         private readonly RoleManager<IdentityRole> roleManager;
- 
-
         public AuthenticationController(UserManager<ApplicationUser> userManager, IConfiguration configuration, RoleManager<IdentityRole> roleManager)
         {
             this.userManager = userManager;
             _configuration = configuration;
             this.roleManager = roleManager;
-           
-
         }
         [HttpPost]
         [Route("Register")]
-        public async Task<IActionResult> Register([FromBody] RegisterModel model)
+        public async Task<IActionResult> Register ([FromBody] RegisterModel model)
         {
             var userExist = await userManager.FindByNameAsync(model.UserName);
             if (userExist != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = "User need Name" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User need Name" });
             ApplicationUser user = new ApplicationUser()
             {
                 Email = model.Email,
@@ -59,164 +52,27 @@ namespace CarRentalApi.Controllers
             var result = await userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = "User need Password" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error",  Message = "User need Password"});
             }
-            else
+            if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
+                await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
+            if (!await roleManager.RoleExistsAsync(UserRoles.User))
+                await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
+            if (await roleManager.RoleExistsAsync(UserRoles.Admin))
             {
-                if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
-                    await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
-                if (!await roleManager.RoleExistsAsync(UserRoles.User))
-                    await roleManager.CreateAsync(new IdentityRole(UserRoles.User));
-                if (await roleManager.RoleExistsAsync(UserRoles.Admin))
-                {
-                    await userManager.AddToRoleAsync(user, UserRoles.User);
-                }
-                string token = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                var confirmationUrl = Url.Action("ConfirmEmail", "Authentication", new { userId = user.Id, token = token });
-                var url = $"https://localhost:44397" + confirmationUrl;
-                var mailClient = new SendGridClient("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");
-                var msg = new SendGridMessage()
-                {
-                    From = new EmailAddress("carrental101czs@gmail.com", "CarRent"),
-                    Subject = "Potwierdź swój adres e-mail",
-                    HtmlContent = $"<h5>Kliknij poniżej, aby zatwierdzić swój e-mail</h5><br>" +
-                    $"<a href=\"{url}\">Potwierdź maila</a>"
-                };
-                msg.AddTo(new EmailAddress(user.Email));
-                await mailClient.SendEmailAsync(msg);
-                return Ok(new Authentication.Response { Status = "Success", Message = "User Created Successfully, confirmation required before you can log in." });
+                await userManager.AddToRoleAsync(user, UserRoles.User);
             }
+
+                return Ok(new Response { Status = "Success", Message = "User Created Successfully" });
+
         }
-        [HttpGet, Route("ConfirmEmail")]
-        [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string token)
-        {
-            if (userId == null || token == null)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = "UserId or token is null" });
-            }
-            var user = await userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = $"User ID {userId} is invalid" });
-            }
-            var result = await userManager.ConfirmEmailAsync(user, token);
-            if (result.Succeeded)
-            {
-                return Ok(new Authentication.Response { Status = "Success", Message = "Email confirmed!" });
-            }
-            return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = $"Email cannot be confirmed" });
-        }
-        [HttpGet, Route("ForgetPasswordAsync")]
-        [AllowAnonymous]
-        public async Task<UserManagerResponse> ForgetPasswordAsync(string email)
-        {
-            var user = await userManager.FindByEmailAsync(email);
-            if (user == null)
-                return new UserManagerResponse
-                {
-                    IsSuccess = false,
-                    Message = "No user associated with email",
-                };
-
-            var token = await userManager.GeneratePasswordResetTokenAsync(user);
-            var mailClient = new SendGridClient("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");
-            var msg = new SendGridMessage()
-            {
-                From = new EmailAddress("carrental101czs@gmail.com", "CarRent"),
-                Subject = "Reset hasla",
-                PlainTextContent = $"Kliknij w poniższy link, żeby ustawić nowe hasło." +
-                    $"\n {user.Id} \n {token}"
-            };
-            msg.AddTo(new EmailAddress(user.Email, "test"));
-            await mailClient.SendEmailAsync(msg);
-            return new UserManagerResponse
-            {
-                IsSuccess = true,
-                Message = "Reset password URL has been sent to the email successfully!"
-            };
-        }
-        [HttpGet, Route("ResetPasswordAsync")]
-        [AllowAnonymous]
-        public async Task<UserManagerResponse> ResetPasswordAsync(ResetPasswordModel model)
-        {
-            var user = await userManager.FindByEmailAsync(model.Email);
-            if (user == null)
-                return new UserManagerResponse
-                {
-                    IsSuccess = false,
-                    Message = "No user associated with email",
-                };
-
-            if (model.NewPassword != model.ConfirmPassword)
-                return new UserManagerResponse
-                {
-                    IsSuccess = false,
-                    Message = "Password doesn't match its confirmation",
-                };
-
-            var decodedToken = WebEncoders.Base64UrlDecode(model.Token);
-            string normalToken = Encoding.UTF8.GetString(decodedToken);
-
-            var result = await userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
-
-            if (result.Succeeded)
-                return new UserManagerResponse
-                {
-                    Message = "Password has been reset successfully!",
-                    IsSuccess = true,
-                };
-
-            return new UserManagerResponse
-            {
-                Message = "Something went wrong",
-                IsSuccess = false,
-                Errors = result.Errors.Select(e => e.Description),
-            };
-        }
-        [HttpPost("ForgetPassword")]
-        public async Task<IActionResult> ForgetPassword(string email)
-        {
-            if (string.IsNullOrEmpty(email))
-                return NotFound();
-
-            var result = await ForgetPasswordAsync(email);
-
-            if (result.IsSuccess)
-            {
-                return Ok(result); // 200
-            }
-
-            return BadRequest(result); // 400
-        }
-
-     
-        [HttpPost("ResetPassword")]
-        public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await ResetPasswordAsync(model);
-
-                if (result.IsSuccess)
-                    return Ok(result);
-
-                return BadRequest(result);
-            }
-
-            return BadRequest("Some properties are not valid");
-        }
-
-
-
-
         [HttpPost]
         [Route("RegisterAdmin")]
         public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)
         {
             var userExist = await userManager.FindByNameAsync(model.UserName);
             if (userExist != null)
-                return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = "User need Name" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User need Name" });
             ApplicationUser user = new ApplicationUser()
             {
                 Email = model.Email,
@@ -226,7 +82,7 @@ namespace CarRentalApi.Controllers
             var result = await userManager.CreateAsync(user, model.Password);
             if (!result.Succeeded)
             {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = "User need Password" });
+                return StatusCode(StatusCodes.Status500InternalServerError, new Response { Status = "Error", Message = "User need Password" });
             }
             if (!await roleManager.RoleExistsAsync(UserRoles.Admin))
                 await roleManager.CreateAsync(new IdentityRole(UserRoles.Admin));
@@ -237,7 +93,7 @@ namespace CarRentalApi.Controllers
                 await userManager.AddToRoleAsync(user, UserRoles.Admin);
             }
 
-            return Ok(new Authentication.Response { Status = "Success", Message = "User Created Successfully" });
+            return Ok(new Response { Status = "Success", Message = "User Created Successfully" });
 
         }
         [HttpPost]
@@ -271,43 +127,41 @@ namespace CarRentalApi.Controllers
                 {
                     token = new JwtSecurityTokenHandler().WriteToken(token),
                     expiration = token.ValidTo,
-                    User = user.UserName,
-                    Id=user.Id,
-                    Role = userRoles,
+                    User = user.UserName
                 });
             }
             return Unauthorized();
             
         }
         [HttpPost, Route("UserEdit")]
-         public async Task<IActionResult> UserEdit([FromBody] EditModel model)
+         public async Task<IActionResult> UserEdit(string id, string LastName,string FirstName, string pesel,
+            string Adress,string IdcardNumber)
         {
-            var user = await userManager.FindByIdAsync(model.id);
+            var user = await userManager.FindByIdAsync(id);
             if (user == null)
             {
                 return NotFound($"Unable to load user with ID '{userManager.GetUserId(User)}'.");
             }
 
-            if (user.LastName != model.lastName)
+            if (user.LastName != LastName)
             {
-                user.LastName = model.lastName;
+                user.LastName = LastName;
             }
-            if (user.FirstName != model.firstName)
+            if (user.FirstName != FirstName)
             {
-                user.FirstName = model.firstName;
+                user.FirstName = FirstName;
             }
-            if (user.Address != model.Adress)
+            if (user.Address != Adress)
             {
-                user.Address = model.Adress;
+                user.Address = Adress;
             }
-            if (user.Pesel != model.pesel)
+            if (user.Pesel != pesel)
             {
-                user.Pesel = model.pesel;
+                user.Pesel = pesel;
             }
-            if(user.IDcardNumber != model.IdcardNumber)
+            if(user.IDcardNumber != IdcardNumber)
             {
-                user.IDcardNumber = model.IdcardNumber;
-
+                user.IDcardNumber = IdcardNumber;
             }
             if(user.IsActive == false)
             {
@@ -319,7 +173,7 @@ namespace CarRentalApi.Controllers
             return NoContent();
 
 
-
         }
+
     }
 }

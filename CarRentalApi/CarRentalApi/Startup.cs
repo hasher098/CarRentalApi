@@ -43,10 +43,7 @@ namespace CarRentalApi
             services.AddControllers();
        
             services.AddDbContext<CarRentDbContext>(Options => Options.UseSqlServer(Configuration.GetConnectionString("CarRentalDB")));
-            services.AddIdentity<ApplicationUser, IdentityRole>(options =>
-            {
-                options.SignIn.RequireConfirmedEmail = true;
-            })
+            services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<CarRentDbContext>()
                 .AddDefaultTokenProviders();
 
