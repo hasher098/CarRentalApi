@@ -73,7 +73,7 @@ namespace CarRentalApi.Controllers
                 }
                 string token = await userManager.GenerateEmailConfirmationTokenAsync(user);
                 var confirmationUrl = Url.Action("ConfirmEmail", "Authentication", new { userId = user.Id, token = token });
-                var url = $"https://localhost:44397" + confirmationUrl;
+                var url = $"https://carrentalapi20201123180919.azurewebsites.net" + confirmationUrl;
                 var mailClient = new SendGridClient("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");
                 var msg = new SendGridMessage()
                 {
