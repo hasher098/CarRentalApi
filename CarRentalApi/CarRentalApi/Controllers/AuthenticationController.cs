@@ -206,6 +206,34 @@ namespace CarRentalApi.Controllers
 
             return BadRequest("Some properties are not valid");
         }
+        [HttpGet, Route("GetUserList")]
+        public async Task<IEnumerable<ApplicationUser>> GetUserList()
+        {
+            var user = await userManager.GetUsersInRoleAsync("User");
+
+
+
+            return user;
+        }
+
+        [HttpGet]
+        [Route("GetUserDetails/{id}")]
+        public async Task<UserDetails> GetUserDetails(string id)
+        {
+            var user = await userManager.FindByIdAsync(id);
+
+            var details = new UserDetails()
+            {
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+                Address = user.Address,
+                IDcardNumber = user.IDcardNumber,
+                Pesel = user.Pesel
+
+            };
+
+            return details;
+        }
 
 
 
