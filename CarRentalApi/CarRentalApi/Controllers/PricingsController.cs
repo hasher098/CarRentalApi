@@ -105,5 +105,16 @@ namespace CarRentalApi.Controllers
         {
             return _context.Pricings.Any(e => e.Id == id);
         }
+        // GET: api/Pricings/5
+        [HttpGet]
+        [Route("PricingByCarCopyId/{id}")]
+        public async Task<IEnumerable<Pricing>> GetPricingByCarCopyId(int id)
+        {
+            var pricing = from t in _context.Pricings select t;
+            pricing = pricing.Where(p => p.CarCopyId == id);
+
+
+            return pricing;
+        }
     }
 }
