@@ -26,6 +26,16 @@ namespace CarRentalApi.Controllers
         {
             return await _context.CarCopies.ToListAsync();
         }
+        // GET: api/ChoosenCarCopies/1
+        [Route("GetListOfCarCopies/{copyId}")]
+        [HttpGet]
+        public async Task<ActionResult<IEnumerable<CarCopy>>> GetListOfCarCopies(int copyId)
+        {
+            var cars = from t in _context.CarCopies select t;
+            cars = cars.Where(s => s.CarId == copyId);
+            return await cars.ToListAsync();
+        }
+        
 
         // GET: api/CarCopies/5
         [HttpGet("{id}")]
