@@ -106,35 +106,35 @@ namespace CarRentalApi.Controllers
             return _context.Rents.Any(e => e.Id == id);
         }
 
-        [HttpPost,Route("RentCar")]
-        public async Task<ActionResult<Rent>> NewRent(string userId, int carCopyId, DateTime RentDate, DateTime ReturnDate)
+        [HttpPost, Route("RentCar")]
+        public async Task<ActionResult<Rent>> NewRent([FromBody] Rent newRent)
         {
 
-          
-                var rent = new Rent
-                {
-                   
-                    UserID = userId,
-                    CarCopyId = carCopyId,
-                    RentDate = RentDate,
-                    ReturnDate = ReturnDate
-                };
-                _context.Rents.Add(rent);
+
+            var rent = new Rent
+            {
+
+                UserID = newRent.UserID,
+                CarCopyId = newRent.CarCopyId,
+                RentDate = newRent.RentDate,
+                ReturnDate = newRent.ReturnDate
+            };
+            _context.Rents.Add(rent);
 
 
 
-                var isRented = await _context.CarCopies.FindAsync(carCopyId);
-                if (ReturnDate > DateTime.Now)
-                {
-                    isRented.IsRented = true;
-                    _context.CarCopies.Update(isRented);
+            var isRented = await _context.CarCopies.FindAsync(newRent.CarCopyId);
+            if (newRent.ReturnDate > DateTime.Now)
+            {
+                isRented.IsRented = true;
+                _context.CarCopies.Update(isRented);
 
-                }
-                await _context.SaveChangesAsync();
+            }
+            await _context.SaveChangesAsync();
 
-            return  NoContent();
+            return NoContent();
 
-                
+
         }
     }
 }
