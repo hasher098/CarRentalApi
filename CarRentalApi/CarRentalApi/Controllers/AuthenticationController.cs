@@ -71,145 +71,113 @@ namespace CarRentalApi.Controllers
                 {
                     await userManager.AddToRoleAsync(user, UserRoles.User);
                 }
-                string token = await userManager.GenerateEmailConfirmationTokenAsync(user);
-                var confirmationUrl = Url.Action("ConfirmEmail", "Authentication", new { userId = user.Id, token = token });
-                var url = $"https://localhost:44397" + confirmationUrl;
-                var mailClient = new SendGridClient("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");
-                var msg = new SendGridMessage()
-                {
-                    From = new EmailAddress("carrental101czs@gmail.com", "CarRent"),
-                    Subject = "Potwierdź swój adres e-mail",
-                    HtmlContent = $"<h5>Kliknij poniżej, aby zatwierdzić swój e-mail</h5><br>" +
-                    $"<a href=\"{url}\">Potwierdź maila</a>"
-                };
-                msg.AddTo(new EmailAddress(user.Email));
-                await mailClient.SendEmailAsync(msg);
                 return Ok(new Authentication.Response { Status = "Success", Message = "User Created Successfully, confirmation required before you can log in." });
             }
         }
-        [HttpGet, Route("ConfirmEmail")]
-        [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string token)
-        {
-            if (userId == null || token == null)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = "UserId or token is null" });
-            }
-            var user = await userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = $"User ID {userId} is invalid" });
-            }
-            var result = await userManager.ConfirmEmailAsync(user, token);
-            if (result.Succeeded)
-            {
-                return Ok(new Authentication.Response { Status = "Success", Message = "Email confirmed!" });
-            }
-            return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = $"Email cannot be confirmed" });
-        }
-        [HttpGet, Route("ForgetPasswordAsync")]
-        [AllowAnonymous]
-        public async Task<UserManagerResponse> ForgetPasswordAsync(string email)
-        {
-            var user = await userManager.FindByEmailAsync(email);
-            if (user == null)
-                return new UserManagerResponse
-                {
-                    IsSuccess = false,
-                    Message = "No user associated with email",
-                };
+        //[HttpGet, Route("ConfirmEmail")]
+        //[AllowAnonymous]
+        //public async Task<IActionResult> ConfirmEmail(string userId, string token)
+        //{
+        //    if (userId == null || token == null)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = "UserId or token is null" });
+        //    }
+        //    var user = await userManager.FindByIdAsync(userId);
+        //    if (user == null)
+        //    {
+        //        return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = $"User ID {userId} is invalid" });
+        //    }
+        //    var result = await userManager.ConfirmEmailAsync(user, token);
+        //    if (result.Succeeded)
+        //    {
+        //        return Ok(new Authentication.Response { Status = "Success", Message = "Email confirmed!" });
+        //    }
+        //    return StatusCode(StatusCodes.Status500InternalServerError, new Authentication.Response { Status = "Error", Message = $"Email cannot be confirmed" });
+        //}
+        //[HttpGet, Route("ForgetPasswordAsync")]
+        //[AllowAnonymous]
+        //public async Task<UserManagerResponse> ForgetPasswordAsync(string email)
+        //{
+        //    var user = await userManager.FindByEmailAsync(email);
+        //    if (user == null)
+        //        return new UserManagerResponse
+        //        {
+        //            IsSuccess = false,
+        //            Message = "No user associated with email",
+        //        };
+        //    return new UserManagerResponse
+        //    {
+        //        IsSuccess = true,
+        //        Message = "Reset password URL has been sent to the email successfully!"
+        //    };
+        //}
+        //[HttpGet, Route("ResetPasswordAsync")]
+        //[AllowAnonymous]
+        //public async Task<UserManagerResponse> ResetPasswordAsync(ResetPasswordModel model)
+        //{
+        //    var user = await userManager.FindByEmailAsync(model.Email);
+        //    if (user == null)
+        //        return new UserManagerResponse
+        //        {
+        //            IsSuccess = false,
+        //            Message = "No user associated with email",
+        //        };
 
-            var token = await userManager.GeneratePasswordResetTokenAsync(user);
-            var mailClient = new SendGridClient("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");
-            var msg = new SendGridMessage()
-            {
-                From = new EmailAddress("carrental101czs@gmail.com", "CarRent"),
-                Subject = "Reset hasla",
-                PlainTextContent = $"Kliknij w poniższy link, żeby ustawić nowe hasło." +
-                    $"\n {user.Id} \n {token}"
-            };
-            msg.AddTo(new EmailAddress(user.Email, "test"));
-            await mailClient.SendEmailAsync(msg);
-            return new UserManagerResponse
-            {
-                IsSuccess = true,
-                Message = "Reset password URL has been sent to the email successfully!"
-            };
-        }
-        [HttpGet, Route("ResetPasswordAsync")]
-        [AllowAnonymous]
-        public async Task<UserManagerResponse> ResetPasswordAsync(ResetPasswordModel model)
-        {
-            var user = await userManager.FindByEmailAsync(model.Email);
-            if (user == null)
-                return new UserManagerResponse
-                {
-                    IsSuccess = false,
-                    Message = "No user associated with email",
-                };
+        //    if (model.NewPassword != model.ConfirmPassword)
+        //        return new UserManagerResponse
+        //        {
+        //            IsSuccess = false,
+        //            Message = "Password doesn't match its confirmation",
+        //        };
 
-            if (model.NewPassword != model.ConfirmPassword)
-                return new UserManagerResponse
-                {
-                    IsSuccess = false,
-                    Message = "Password doesn't match its confirmation",
-                };
+        //    var result = await userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
 
-            var decodedToken = WebEncoders.Base64UrlDecode(model.Token);
-            string normalToken = Encoding.UTF8.GetString(decodedToken);
+        //    if (result.Succeeded)
+        //        return new UserManagerResponse
+        //        {
+        //            Message = "Password has been reset successfully!",
+        //            IsSuccess = true,
+        //        };
 
-            var result = await userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
+        //    return new UserManagerResponse
+        //    {
+        //        Message = "Something went wrong",
+        //        IsSuccess = false,
+        //        Errors = result.Errors.Select(e => e.Description),
+        //    };
+        //}
+        //[HttpPost("ForgetPassword")]
+        //public async Task<IActionResult> ForgetPassword(string email)
+        //{
+        //    if (string.IsNullOrEmpty(email))
+        //        return NotFound();
 
-            if (result.Succeeded)
-                return new UserManagerResponse
-                {
-                    Message = "Password has been reset successfully!",
-                    IsSuccess = true,
-                };
+        //    var result = await ForgetPasswordAsync(email);
 
-            return new UserManagerResponse
-            {
-                Message = "Something went wrong",
-                IsSuccess = false,
-                Errors = result.Errors.Select(e => e.Description),
-            };
-        }
-        [HttpPost("ForgetPassword")]
-        public async Task<IActionResult> ForgetPassword(string email)
-        {
-            if (string.IsNullOrEmpty(email))
-                return NotFound();
+        //    if (result.IsSuccess)
+        //    {
+        //        return Ok(result); // 200
+        //    }
 
-            var result = await ForgetPasswordAsync(email);
-
-            if (result.IsSuccess)
-            {
-                return Ok(result); // 200
-            }
-
-            return BadRequest(result); // 400
-        }
+        //    return BadRequest(result); // 400
+        //}
 
      
-        [HttpPost("ResetPassword")]
-        public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                var result = await ResetPasswordAsync(model);
+        //[HttpPost("ResetPassword")]
+        //public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordModel model)
+        //{
+        //    if (ModelState.IsValid)
+        //    {
+        //        var result = await ResetPasswordAsync(model);
 
-                if (result.IsSuccess)
-                    return Ok(result);
+        //        if (result.IsSuccess)
+        //            return Ok(result);
 
-                return BadRequest(result);
-            }
+        //        return BadRequest(result);
+        //    }
 
-            return BadRequest("Some properties are not valid");
-        }
-
-
-
-
+        //    return BadRequest("Some properties are not valid");
+        //}
         [HttpPost]
         [Route("RegisterAdmin")]
         public async Task<IActionResult> RegisterAdmin([FromBody] RegisterModel model)
