@@ -7,10 +7,7 @@ namespace CarRentalApi.Controllers
     public class UserManagerResponse
     {
         internal IEnumerable<string> Errors;
-
         public bool IsSuccess { get; set; }
         public string Message { get; set; }
-
-
     }
 }

@@ -74,10 +74,11 @@ namespace CarRentalApi.Controllers
                 string token = await userManager.GenerateEmailConfirmationTokenAsync(user);
                 var confirmationUrl = Url.Action("ConfirmEmail", "Authentication", new { userId = user.Id, token = token });
                 var url = $"https://carrentalapi20201123180919.azurewebsites.net" + confirmationUrl;
-                var mailClient = new SendGridClient("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");
+                var envVar = Environment.GetEnvironmentVariable("SendGridCarRent");
+                var mailClient = new SendGridClient(envVar);
                 var msg = new SendGridMessage()
                 {
-                    From = new EmailAddress("carrental101czs@gmail.com", "CarRent"),
+                    From = new EmailAddress("kajublu@gmail.com", "CarRent"),
                     Subject = "Potwierdź swój adres e-mail",
                     HtmlContent = $"<h5>Kliknij poniżej, aby zatwierdzić swój e-mail</h5><br>" +
                     $"<a href=\"{url}\">Potwierdź maila</a>"
@@ -118,17 +119,20 @@ namespace CarRentalApi.Controllers
                     IsSuccess = false,
                     Message = "No user associated with email",
                 };
-
             var token = await userManager.GeneratePasswordResetTokenAsync(user);
-            var mailClient = new SendGridClient("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");
+            var resetUrl = Url.Action("ResetPassword", "Authentication", new { userId = user.Id, token = token });
+            var url = $"https://carrentalapi20201123180919.azurewebsites.net" + resetUrl;
+            var envVar = Environment.GetEnvironmentVariable("SendGridCarRent");
+            var mailClient = new SendGridClient(envVar);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("carrental101czs@gmail.com", "CarRent"),
-                Subject = "Reset hasla",
-                PlainTextContent = $"Kliknij w poniższy link, żeby ustawić nowe hasło." +
-                    $"\n {user.Id} \n {token}"
+                From = new EmailAddress("kajublu@gmail.com", "CarRent"),
+                Subject = "Reset hasła",
+                HtmlContent = $"<h5>Zażądałeś resetu hasła. Kliknij w poniższy link, aby przejść do formularzu resetu hasła</h5><br>" +
+                $"<a href=\"{url}\">Resetuj hasło</a>" +
+                $"<h5>Jeśli to nie byłeś Ty, jak najszybciej zmień hasło!</h5><br>"
             };
-            msg.AddTo(new EmailAddress(user.Email, "test"));
+            msg.AddTo(new EmailAddress(user.Email));
             await mailClient.SendEmailAsync(msg);
             return new UserManagerResponse
             {
@@ -147,26 +151,21 @@ namespace CarRentalApi.Controllers
                     IsSuccess = false,
                     Message = "No user associated with email",
                 };
-
             if (model.NewPassword != model.ConfirmPassword)
                 return new UserManagerResponse
                 {
                     IsSuccess = false,
                     Message = "Password doesn't match its confirmation",
                 };
-
             var decodedToken = WebEncoders.Base64UrlDecode(model.Token);
             string normalToken = Encoding.UTF8.GetString(decodedToken);
-
             var result = await userManager.ResetPasswordAsync(user, model.Token, model.NewPassword);
-
             if (result.Succeeded)
                 return new UserManagerResponse
                 {
                     Message = "Password has been reset successfully!",
                     IsSuccess = true,
                 };
-
             return new UserManagerResponse
             {
                 Message = "Something went wrong",
@@ -186,11 +185,8 @@ namespace CarRentalApi.Controllers
             {
                 return Ok(result); // 200
             }
-
             return BadRequest(result); // 400
         }
-
-     
         [HttpPost("ResetPassword")]
         public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordModel model)
         {
@@ -210,9 +206,6 @@ namespace CarRentalApi.Controllers
         public async Task<IEnumerable<ApplicationUser>> GetUserList()
         {
             var user = await userManager.GetUsersInRoleAsync("User");
-
-
-
             return user;
         }
 

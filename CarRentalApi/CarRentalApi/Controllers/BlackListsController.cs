@@ -97,7 +97,6 @@ namespace CarRentalApi.Controllers
 
             _context.BlackList.Remove(blackList);
             await _context.SaveChangesAsync();
-
             return blackList;
         }
 

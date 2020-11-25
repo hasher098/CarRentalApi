@@ -22,11 +22,6 @@ namespace CarRentalApi.Entities
         public DbSet<Pricing> Pricings { get; set; }
         public DbSet<Rent> Rents { get; set; }
         public DbSet<BlackList> BlackList { get; set; }
-
-
-        DateTime data1 = new DateTime(2020, 11, 12);
-        DateTime data2 = new DateTime(2020, 11, 16);
-
         protected override void OnModelCreating(ModelBuilder builder)
         {
             base.OnModelCreating(builder);

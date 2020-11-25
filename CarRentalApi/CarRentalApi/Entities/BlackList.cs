@@ -12,8 +12,8 @@ using System.Text.Json.Serialization;
         public int Id { get; set; }
         [ForeignKey("ApplicationUser")]
         public string BlacklistedUserId { get; set; }
-    [JsonIgnore]
-    public virtual ApplicationUser ApplicationUser { get; set; }
+        [JsonIgnore]
+        public virtual ApplicationUser ApplicationUser { get; set; }
         [Required]
         public bool IsBlacklisted { get; set; }
         [Required]
