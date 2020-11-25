@@ -27,5 +27,6 @@ namespace CarRentalApi.Authentication
         [JsonIgnore]
         public virtual IList<Rent> Rent { get; set; }
 
+
     }
 }

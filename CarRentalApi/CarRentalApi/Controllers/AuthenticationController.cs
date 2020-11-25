@@ -275,6 +275,7 @@ namespace CarRentalApi.Controllers
             if(user.IDcardNumber != model.IdcardNumber)
             {
                 user.IDcardNumber = model.IdcardNumber;
+
             }
             if(user.IsActive == false)
             {
@@ -284,6 +285,7 @@ namespace CarRentalApi.Controllers
             await userManager.UpdateAsync(user);
 
             return NoContent();
+
 
 
         }
